@@ -19,7 +19,7 @@ class Home : AppCompatActivity() {
         }
 
         knowledgeBtn.setOnClickListener {
-            val intent2 = Intent(this, Result::class.java);
+            val intent2 = Intent(this, KnowledgeMain::class.java);
             startActivity(intent2)
 
         }
