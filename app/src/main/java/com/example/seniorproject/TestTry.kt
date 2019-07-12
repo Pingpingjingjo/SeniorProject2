@@ -12,26 +12,27 @@ import kotlinx.android.synthetic.main.activity_test_try.*
 class TestTry : AppCompatActivity() {
 
     lateinit var dataReference: DatabaseReference
-    lateinit var testList: MutableList<TestRecord>
-    private val Trynode: MutableList<TestRecord> = mutableListOf()
+    lateinit var disorderNameList: MutableList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_try)
 //        initSaladMenu()
-    }//overide
-    private fun initSaladMenu(firebaseData: DatabaseReference) {
-        val menuListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                Trynode.clear()
-                dataSnapshot.children.mapNotNullTo(Trynode) { it.getValue<TestRecord>(TestRecord::class.java) }
-            }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                println("loadPost:onCancelled ${databaseError.toException()}")
+        disorderNameList = mutableListOf()
+        dataReference = FirebaseDatabase.getInstance().getReference("Datas")
+        dataReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
             }
-        }
-            firebaseData.child("Datas").addListenerForSingleValueEvent(menuListener)
+            override fun onDataChange(p0: DataSnapshot) {
+
+                for (item in p0.children) {
+                    val c = item.getKey()
+                    Log.d("fuck ", c)
+                    disorderNameList.add(c!!)
+                }
+            }
+        })
     }
 
 
