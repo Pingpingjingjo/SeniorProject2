@@ -5,70 +5,109 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        android:background="#FFFFFF"
+        android:textColor="#000000">
 
-    <TextView
-            android:layout_width="143dp"
-            android:layout_height="53dp"
-            android:text="MENTAL"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.271" android:textSize="36sp" android:layout_marginLeft="132dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="132dp"
-            android:layout_marginRight="132dp" android:id="@+id/textView"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/UnameTxt"
-            android:hint="ชื่อผู้ใช้" android:layout_marginTop="124dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="numberPassword"
-            android:ems="10"
-            android:id="@+id/PwordTxt"
-            android:hint="รหัสผ่าน" android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/UnameTxt"
-            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.072"/>
-    <Button
-            android:text="เข้าใช้"
-            android:layout_width="119dp"
-            android:layout_height="37dp" android:id="@+id/signinBnt"
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="360dp"
+            android:layout_height="643dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/PwordTxt" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.15" app:layout_constraintHorizontal_bias="0.503"/>
-    <TextView
-            android:text="ลงทะเบียน"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:id="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/PwordTxt" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.818"
-            app:layout_constraintVertical_bias="0.0" android:layout_marginTop="8dp"/>
-    <ListView
-            android:layout_width="318dp"
-            android:layout_height="142dp"
-            android:id="@+id/trymain" android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/signinBnt" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent">
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="221dp" app:srcCompat="@drawable/logo2"
+                android:id="@+id/imageView7" android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+        />
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="72dp">
+            <ImageView
+                    android:layout_width="58dp"
+                    android:layout_height="52dp"
+                    app:srcCompat="@drawable/person"
+                    android:id="@+id/imageView13"
+                    android:layout_weight="1"
+
+
+            />
+            <EditText
+                    android:layout_width="289dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/UnameTxt"
+                    android:hint="ชื่อผู้ใช้"
+                    android:textColor="#000000"
+                    android:gravity="left"
+                    android:layout_marginRight="15dp"
+
+
+            />
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="72dp">
+            <ImageView
+                    android:layout_width="52dp"
+                    android:layout_height="45dp"
+                    app:srcCompat="@drawable/unlock"
+                    android:id="@+id/imageView14"
+                    android:layout_weight="1"
+            />
+            <EditText
+                    android:layout_width="289dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberPassword"
+                    android:ems="10"
+                    android:id="@+id/PwordTxt"
+                    android:hint="รหัสผ่าน"
+                    android:textColor="#000000"
+                    android:gravity="left"
+                    android:layout_marginRight="15dp"
+
+
+            />
+        </LinearLayout>
+        <TextView
+                android:text="ลงทะเบียน"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:id="@+id/textView2"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:textColor="#000000"
+                android:layout_gravity="right"
+
+
+        />
+        <Button
+                android:text="เข้าใช้"
+                android:layout_width="373dp"
+                android:layout_height="wrap_content" android:id="@+id/signinBnt"
+                android:textColor="#000000"
+                android:gravity="center"
+
+        />
+        <ListView
+                android:layout_width="318dp"
+                android:layout_height="142dp"
+                android:id="@+id/trymain" android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
+                android:textColor="#000000"
+        />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

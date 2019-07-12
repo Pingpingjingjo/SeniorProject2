@@ -16,24 +16,38 @@ class knowledge2 : AppCompatActivity() {
         var spath = " depression"
         var fullpath = File(gpath + File.separator + spath)
         Log.w("fullpath", "" + fullpath)
-        imageReaderNew(fullpath)
+        imageReader(fullpath)
     }
 
-    fun imageReaderNew(root: File) {
-        val fileList: ArrayList<File> = ArrayList()
-        val listAllFiles = root.listFiles()
+//    fun imageReaderNew(root: File) {
+//        val fileList: ArrayList<File> = ArrayList()
+//        val listAllFiles = root.listFiles()
+//
+//        if (listAllFiles != null && listAllFiles.size > 0) {
+//            for (currentFile in listAllFiles) {
+//                if (currentFile.name.endsWith(".m4v")) {
+//                    // File absolute path
+//                    Log.e("downloadFilePath", currentFile.getAbsolutePath())
+//                    // File Name
+//                    Log.e("downloadFileName", currentFile.getName())
+//                    fileList.add(currentFile.absoluteFile)
+//                }
+//            }
+//            Log.w("fileList", "" + fileList.size)
+//        }
+//    }
 
-        if (listAllFiles != null && listAllFiles.size > 0) {
-            for (currentFile in listAllFiles) {
-                if (currentFile.name.endsWith(".m4v")) {
-                    // File absolute path
-                    Log.e("downloadFilePath", currentFile.getAbsolutePath())
-                    // File Name
-                    Log.e("downloadFileName", currentFile.getName())
-                    fileList.add(currentFile.absoluteFile)
-                }
+    fun imageReader(root : File):ArrayList<File>{
+        val a : ArrayList<File> ? = null
+        val files = root.listFiles()
+        for (i in 0..files.size-1){
+            if (files[i].name.endsWith(".m4v")){
+                a?.add(files[i])
+                Log.d("try", a.toString())
+
             }
-            Log.w("fileList", "" + fileList.size)
         }
+
+        return a!!
     }
 }
