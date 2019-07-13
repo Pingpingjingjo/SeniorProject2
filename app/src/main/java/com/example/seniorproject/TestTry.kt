@@ -14,10 +14,21 @@ class TestTry : AppCompatActivity() {
     lateinit var dataReference: DatabaseReference
     lateinit var disorderNameList: MutableList<String>
 
+
+    lateinit var dataReferenceQ: DatabaseReference
+    lateinit var QuestionList: MutableList<TestRecord>
+
+    lateinit var dataReferenceC: DatabaseReference
+    lateinit var ChoiceList: MutableList<String>
+
+    lateinit var dataReferenceS: DatabaseReference
+    lateinit var ScoreListD: MutableList<String>
+    var i: Int = 0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_try)
-//        initSaladMenu()
 
         disorderNameList = mutableListOf()
         dataReference = FirebaseDatabase.getInstance().getReference("Datas")
@@ -30,9 +41,55 @@ class TestTry : AppCompatActivity() {
                     val c = item.getKey()
                     Log.d("fuck ", c)
                     disorderNameList.add(c!!)
-                }
+
+                    for (items in disorderNameList[i]){
+                        dataReference = FirebaseDatabase.getInstance().getReference("Datas/"+ disorderNameList[i]+"/Question")
+                        dataReferenceQ.addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onCancelled(p0: DatabaseError) {
+                            }
+                            override fun onDataChange(p0: DataSnapshot) {
+
+                                for (item in p0.children) {
+                                    val c = item.getKey()
+                                    Log.d("cry ", c)
+//                                    QuestionList.add(c!!)
+                                }
+                            }
+                        })
+
+                    }
+
+                    for (items in disorderNameList[i]){
+                        dataReference = FirebaseDatabase.getInstance().getReference("Datas/"+ disorderNameList[i]+"/Score")
+                        dataReferenceS.addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onCancelled(p0: DatabaseError) {
+                            }
+                            override fun onDataChange(p0: DataSnapshot) {
+
+                                for (item in p0.children) {
+                                    val c = item.getKey()
+                                    Log.d("cry ", c)
+                                    ScoreListD.add(c!!)
+                                }
+                            }
+                        })
+
+                    }
+
+
+
+
+
+
+
+                }//loop for
             }
         })
+
+
+
+
+
     }
 
 
