@@ -42,8 +42,8 @@ class TestTry : AppCompatActivity() {
                     Log.d("fuck ", c)
                     disorderNameList.add(c!!)
 
-                    for (items in disorderNameList[i]){
-                        dataReference = FirebaseDatabase.getInstance().getReference("Datas/"+ disorderNameList[i]+"/Question")
+                    for (items in disorderNameList){
+                        dataReference = FirebaseDatabase.getInstance().getReference("Datas/"+ items +"/Question")
                         dataReferenceQ.addListenerForSingleValueEvent(object : ValueEventListener {
                             override fun onCancelled(p0: DatabaseError) {
                             }
