@@ -14,7 +14,7 @@ class Home : AppCompatActivity() {
 
         //page transition//
         testBtn.setOnClickListener {
-            val intent1 = Intent(this,Test::class.java);
+            val intent1 = Intent(this,TestTry::class.java);
             startActivity(intent1)
 
         }
