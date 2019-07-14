@@ -264,7 +264,7 @@ class TestTry : AppCompatActivity() {
         //page transition
         val intent1 = Intent(this, Result::class.java)
         for (disorder in disorderNameList){
-            intent1.putExtra("score"+disorder, scores[disorder].toString())
+            intent1.putExtra(disorder, scores[disorder])
         }
         startActivity(intent1)
     }
