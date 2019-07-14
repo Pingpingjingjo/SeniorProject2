@@ -19,50 +19,8 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView5" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp">
-        <LinearLayout
-                android:orientation="horizontal"
+        <ListView
                 android:layout_width="match_parent"
-                android:layout_height="110dp">
-            <ImageView
-                    android:layout_width="204dp"
-                    android:layout_height="106dp" app:srcCompat="@drawable/depress" android:id="@+id/imageView6"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:scaleType="fitEnd"/>
-            <TextView
-                    android:text="หกดหก"
-                    android:layout_width="146dp"
-                    android:layout_height="106dp" android:id="@+id/resultD"
-                    android:gravity="center_vertical"
-            />
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="102dp">
-            <ImageView
-                    android:layout_width="204dp"
-                    android:layout_height="102dp" app:srcCompat="@drawable/anxie" android:id="@+id/imageView8"/>
-            <TextView
-                    android:text="TextView"
-                    android:layout_width="157dp"
-                    android:layout_height="match_parent" android:id="@+id/resultA"
-                    android:gravity="center_vertical"
-            />
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="105dp">
-            <ImageView
-                    android:layout_width="207dp"
-                    android:layout_height="105dp" app:srcCompat="@drawable/social" android:id="@+id/imageView9"/>
-            <TextView
-                    android:text="TextView"
-                    android:layout_width="152dp"
-                    android:layout_height="match_parent" android:id="@+id/resultS"
-                    android:gravity="center_vertical"
-            />
-        </LinearLayout>
+                android:layout_height="match_parent" android:id="@+id/results"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
