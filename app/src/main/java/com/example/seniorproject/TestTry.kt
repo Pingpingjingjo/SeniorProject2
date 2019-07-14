@@ -50,9 +50,9 @@ class TestTry : AppCompatActivity() {
                             override fun onDataChange(p0: DataSnapshot) {
 
                                 for (item in p0.children) {
-                                    val c = item.getKey()
-                                    Log.d("cry ", c)
-//                                    QuestionList.add(c!!)
+                                    val a = item.getKey()
+                                    Log.d("cry ", a)
+//                                    QuestionList.add(a!!)
                                 }
                             }
                         })

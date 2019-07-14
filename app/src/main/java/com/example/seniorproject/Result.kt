@@ -71,83 +71,83 @@ class Result : AppCompatActivity() {
 //        DresultForText()
 //        AresulForText()
 //        resultForImg()
-        depression()
+//        depression()
    //     anxiety()
-        imageButton.setOnClickListener{
-                    DresultForText()
-                    resultForImg()
-
-
-        }
-
-
-
-
-
-
-        }// oncreate
-    fun DresultForText(){
-
-//        if (inputD.toInt() >= ScoreListD1[1].toInt() && inputD.toInt() < ScoreListD1[0].toInt()){
-//           Log.d("Toint",inputD)
-//            //textView14.setText(ResultListD[0]).toString()
+//        imageButton.setOnClickListener{
+//                    DresultForText()
+//                    resultForImg()
+//
+//
 //        }
-        if (inputD >= ScoreListD1[1]&& inputD < ScoreListD1[0]){
-            textView14.setText(ResultListD[0]).toString()
-        }
-        else if (inputD>= ScoreListD2[1]&& inputD < ScoreListD2[0]){
-            textView14.setText(ResultListD[1])
-        }
-        else if (inputD>= ScoreListD3[1]&& inputD < ScoreListD3[0]){
-            textView14.setText(ResultListD[2])
-        }
-        else if (inputD>= ScoreListD4[1]&& inputD < ScoreListD4[0]){
-            textView14.setText(ResultListD[3])
-        }
-        else{
-            textView14.setText(ResultListD[4])
-        }
-
-    }
-    fun AresulForText(){
-        if (inputA >= ScoreListA1[1]&& inputA < ScoreListA1[0]){
-            textView16.setText(ResultListA[0])
-        }
-        else if(inputA >= ScoreListA2[1]&& inputA < ScoreListA2[0]){
-            textView16.setText(ResultListA[1])
-        }
-        else if(inputA >= ScoreListA3[1]&& inputA < ScoreListA3[0]){
-            textView16.setText(ResultListA[2])
-        }
-        else if(inputA >= ScoreListA4[1]&& inputA < ScoreListA4[0]){
-            textView16.setText(ResultListA[3])
-        }
-        else{
-            textView16.setText(ResultListA[4])
-        }
-
-    }
-
-    fun resultForImg(){
-        if (inputD.toInt()==0 && inputA.toInt()==0){
-            dtxt.setText(inputD+"%").toString()
-            atxt.setText(inputA+"%").toString()
-            datxt.setText("0%").toString()
-        }
-        else if(inputD.toInt()>0 && inputA.toInt()==0){
-            var a = (((inputD.toInt())* 100)/ScoreListD4[0].toInt()).toString()
-
-            dtxt.setText(a + "%").toString()
-            atxt.setText(inputA + "%").toString()
-            datxt.setText("0%").toString()
-        }
-        else if(inputD.toInt()==0 && inputA.toInt()>0){
-            var a = (((inputA.toInt())* 100)/ScoreListD4[0].toInt()).toString()
-
-            dtxt.setText(inputD + "%").toString()
-            atxt.setText(a + "%").toString()
-            datxt.setText("0%").toString()
-        }
+//
+//
+//
+//
+//
+//
+//        }// oncreate
+//    fun DresultForText(){
+//
+////        if (inputD.toInt() >= ScoreListD1[1].toInt() && inputD.toInt() < ScoreListD1[0].toInt()){
+////           Log.d("Toint",inputD)
+////            //textView14.setText(ResultListD[0]).toString()
+////        }
+//        if (inputD >= ScoreListD1[1]&& inputD < ScoreListD1[0]){
+//            textView14.setText(ResultListD[0]).toString()
+//        }
+//        else if (inputD>= ScoreListD2[1]&& inputD < ScoreListD2[0]){
+//            textView14.setText(ResultListD[1])
+//        }
+//        else if (inputD>= ScoreListD3[1]&& inputD < ScoreListD3[0]){
+//            textView14.setText(ResultListD[2])
+//        }
+//        else if (inputD>= ScoreListD4[1]&& inputD < ScoreListD4[0]){
+//            textView14.setText(ResultListD[3])
+//        }
+//        else{
+//            textView14.setText(ResultListD[4])
+//        }
+//
+//    }
+//    fun AresulForText(){
+//        if (inputA >= ScoreListA1[1]&& inputA < ScoreListA1[0]){
+//            textView16.setText(ResultListA[0])
+//        }
+//        else if(inputA >= ScoreListA2[1]&& inputA < ScoreListA2[0]){
+//            textView16.setText(ResultListA[1])
+//        }
+//        else if(inputA >= ScoreListA3[1]&& inputA < ScoreListA3[0]){
+//            textView16.setText(ResultListA[2])
+//        }
+//        else if(inputA >= ScoreListA4[1]&& inputA < ScoreListA4[0]){
+//            textView16.setText(ResultListA[3])
+//        }
+//        else{
+//            textView16.setText(ResultListA[4])
+//        }
+//
+//    }
+//
+//    fun resultForImg(){
+//        if (inputD.toInt()==0 && inputA.toInt()==0){
+//            dtxt.setText(inputD+"%").toString()
+//            atxt.setText(inputA+"%").toString()
+//            datxt.setText("0%").toString()
+//        }
+//        else if(inputD.toInt()>0 && inputA.toInt()==0){
+//            var a = (((inputD.toInt())* 100)/ScoreListD4[0].toInt()).toString()
+//
+//            dtxt.setText(a + "%").toString()
+//            atxt.setText(inputA + "%").toString()
+//            datxt.setText("0%").toString()
+//        }
+//        else if(inputD.toInt()==0 && inputA.toInt()>0){
+//            var a = (((inputA.toInt())* 100)/ScoreListD4[0].toInt()).toString()
+//
+//            dtxt.setText(inputD + "%").toString()
+//            atxt.setText(a + "%").toString()
+//            datxt.setText("0%").toString()
+//        }
 //        else if(inputD.toInt()>0 && inputA.toInt()>0){
 //            var a = (((inputA.toInt())* 100)/ScoreListD4[0].toInt()).toString()
 //            var a = (((inputA.toInt())* 100)/ScoreListD4[0].toInt()).toString()

@@ -30,11 +30,7 @@ class signUp : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
         super.onCreate(savedInstanceState)
 
-////        // Write a message to the database
-//        val database = FirebaseDatabase.getInstance()
-//        val myRef = database.getReference("message")
-//        myRef.setValue("High All the time")
-//    }
+
         msgList = mutableListOf()
         dataReference = FirebaseDatabase.getInstance().getReference("Profile")
         dataReference.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -75,7 +71,7 @@ class signUp : AppCompatActivity() {
 
         //-------------------------------Spinner------------------------------------------------//
         // Initializing a String Array
-        val genderlist = arrayOf("Male", "Female", "Others")
+        val genderlist = arrayOf("ชาย", "หญิง", "อื่นๆ")
         // Initializing an ArrayAdapter
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, genderlist)
         // Set the drop down view resource

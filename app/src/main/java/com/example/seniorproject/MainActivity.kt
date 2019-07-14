@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     //to check can get data from fierbase
                     val adapter = MessageAdapter(applicationContext, R.layout.signrecord, msgList)
-                    trymain.adapter = adapter
+//                    trymain.adapter = adapter
                 }
             }
         })

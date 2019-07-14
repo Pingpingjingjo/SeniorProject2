@@ -30,5 +30,7 @@ class KnowledgeMain : AppCompatActivity() {
         }
 
     }
+
+    
 }
 

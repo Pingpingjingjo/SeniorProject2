@@ -12,11 +12,11 @@ class knowledge2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_knowledge2)
 
-        var gpath: String = Environment.getExternalStorageDirectory().absolutePath
-        var spath = " depression"
-        var fullpath = File(gpath + File.separator + spath)
-        Log.w("fullpath", "" + fullpath)
-        imageReader(fullpath)
+//        var gpath: String = Environment.getExternalStorageDirectory().absolutePath
+//        var spath = " depression"
+//        var fullpath = File(gpath + File.separator + spath)
+//        Log.w("fullpath", "" + fullpath)
+//        imageReader(fullpath)
     }
 
 //    fun imageReaderNew(root: File) {
@@ -37,17 +37,17 @@ class knowledge2 : AppCompatActivity() {
 //        }
 //    }
 
-    fun imageReader(root : File):ArrayList<File>{
-        val a : ArrayList<File> ? = null
-        val files = root.listFiles()
-        for (i in 0..files.size-1){
-            if (files[i].name.endsWith(".m4v")){
-                a?.add(files[i])
-                Log.d("try", a.toString())
-
-            }
-        }
-
-        return a!!
-    }
+//    fun imageReader(root : File):ArrayList<File>{
+//        val a : ArrayList<File> ? = null
+//        val files = root.listFiles()
+//        for (i in 0..files.size-1){
+//            if (files[i].name.endsWith(".m4v")){
+//                a?.add(files[i])
+//                Log.d("try", a.toString())
+//
+//            }
+//        }
+//
+//        return a!!
+//    }
 }
