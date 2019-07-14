@@ -13,6 +13,8 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_test.*
 import kotlinx.android.synthetic.main.activity_test_try.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.ArrayList
 
 class TestTry : AppCompatActivity() {
@@ -112,6 +114,8 @@ class TestTry : AppCompatActivity() {
             }
 
         }//
+
+
     }
 
 
@@ -268,4 +272,19 @@ class TestTry : AppCompatActivity() {
         }
         startActivity(intent1)
     }
+
+
+    fun main(args: Array<String>) {
+//        val current = LocalDateTime.now()
+//        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+//        val formatted = current.format(formatter)
+//        println("Current Date and Time is: $formatted")
+
+        //create one variable (string) to keep each (formatted) day
+        // check the lastest array if lastest day >= current
+
+    }
+
+
+
 }
