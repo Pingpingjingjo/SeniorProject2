@@ -44,10 +44,12 @@ class MainActivity : AppCompatActivity() {
             }
         })
             signinBnt.setOnClickListener() {
-//                if (Uservalid1()==true) {
-//                    Page()
-//                }
-               Page()
+                if (Uservalid1()==true) {
+                    MyAppApplication.globalUser = UnameTxt.text.toString()
+                    Page()
+                }
+              // Page()
+
 
             }//end acceptBtn
 

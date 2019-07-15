@@ -11,6 +11,8 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_result.*
 import kotlinx.android.synthetic.main.activity_test.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class Result : AppCompatActivity() {
 
@@ -25,6 +27,8 @@ class Result : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
+
+        Log.d("name", MyAppApplication.globalUser)
 
 
         dataReference = FirebaseDatabase.getInstance().getReference("Datas")
@@ -122,10 +126,53 @@ class Result : AppCompatActivity() {
                             val adapter =
                                 ArrayAdapter(applicationContext, android.R.layout.simple_list_item_1, outputList)
                             results.adapter = adapter
+
+
                         }
 
                     })
                 }
+
+
+                Thread.sleep(1000)
+
+                var lolReference: DatabaseReference =
+                    FirebaseDatabase.getInstance().getReference("Datas")
+                lolReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                    }
+
+                    override fun onDataChange(p0: DataSnapshot) {
+                        //history bullshit
+                        var usrList: MutableList<String> = mutableListOf()
+                        var usrReference = FirebaseDatabase.getInstance().getReference("History")
+                        usrReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onCancelled(p0: DatabaseError) {
+                            }
+
+                            override fun onDataChange(p0: DataSnapshot) {
+                                if (p0!!.exists()) {
+                                    for (i in p0.children) {
+                                        var usr = i.getKey()
+                                        usrList.add(usr!!)
+                                    }
+                                }
+                            }
+                        })
+                        val sdf = SimpleDateFormat("dd-M-yyyy_hh:mm:ss")
+                        val currentDate = sdf.format(Date())
+                        Log.d(" C DATE is  ", currentDate)
+                        var addingReference = FirebaseDatabase.getInstance()
+                            .getReference("History/" + MyAppApplication.globalUser + "/" + currentDate)
+                        for (output in outputList) {
+                            var curRef = addingReference.push()
+                            curRef.setValue(output)
+                            Log.d("the output is", output)
+                        }
+                    }
+
+                })
+
             }
         })
 
