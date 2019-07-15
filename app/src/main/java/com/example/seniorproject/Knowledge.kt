@@ -30,9 +30,6 @@ import java.io.File
 class Knowledge : AppCompatActivity() {
 
     lateinit var depression: StorageReference
-
-    private var TAG = "VideoPlayer"
-
     lateinit var localFile: File
 
 
@@ -81,7 +78,7 @@ class Knowledge : AppCompatActivity() {
 
         videoView.setOnPreparedListener { mp ->
             mp.isLooping = true
-            Log.i(TAG, "Duration = " + videoView.duration)
+            Log.i("lol", "Duration = " + videoView.duration)
         }
         videoView.start()
     }

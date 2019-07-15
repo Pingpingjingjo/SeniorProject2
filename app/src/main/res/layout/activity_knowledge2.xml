@@ -31,18 +31,19 @@
             <TextView
                     android:text="โรคซึมเศร้า"
                     android:layout_width="match_parent"
-                    android:layout_height="43dp" android:id="@+id/textView15"
+                    android:layout_height="43dp"
                     android:gravity="center"
+                    android:id="@+id/uppertext"
             />
             <VideoView
                     android:layout_width="match_parent"
-                    android:layout_height="252dp" android:id="@+id/videoView"
+                    android:layout_height="252dp" android:id="@+id/video"
                     android:gravity="center"
             />
             <Button
                     android:text="Play"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/button1" android:backgroundTint="#a6d1e8"/>
+                    android:layout_height="wrap_content" android:id="@+id/play" android:backgroundTint="#a6d1e8"/>
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -50,11 +51,11 @@
                 <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_media_previous"
-                        android:id="@+id/imageButton3" android:layout_weight="1" android:backgroundTint="#4692bc"/>
+                        android:id="@+id/prev" android:layout_weight="1" android:backgroundTint="#4692bc"/>
                 <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_media_next"
-                        android:id="@+id/imageButton2" android:layout_weight="1" android:backgroundTint="#4692bc"/>
+                        android:id="@+id/next" android:layout_weight="1" android:backgroundTint="#4692bc"/>
             </LinearLayout>
 
 
