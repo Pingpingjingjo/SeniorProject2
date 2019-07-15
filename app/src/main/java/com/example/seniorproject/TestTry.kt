@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.RadioButton
 import android.widget.TextView
 import com.google.firebase.FirebaseError
@@ -13,7 +14,14 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_test.*
 import kotlinx.android.synthetic.main.activity_test_try.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 import java.util.ArrayList
+import kotlinx.coroutines.*
+
+
+
 
 class TestTry : AppCompatActivity() {
 
@@ -31,7 +39,11 @@ class TestTry : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
-        Log.d("woohoo ", "IM IN TEST TRY BITCHES")
+//        Log.d("woohoo ", "IM IN TEST TRY BITCHES")
+//        timeout()
+
+
+
 
         dataReference = FirebaseDatabase.getInstance().getReference("Datas")
         dataReference.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -176,6 +188,11 @@ class TestTry : AppCompatActivity() {
         })
         scoreLists[disorder] = scoreList
 
+
+
+
+
+
     }
 
 
@@ -268,4 +285,64 @@ class TestTry : AppCompatActivity() {
         }
         startActivity(intent1)
     }
+
+//    fun timestamp(args: Array<String>) {
+//        val current = LocalDateTime.now()
+//        val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
+//        val formatted = current.format(formatter)
+//        println("Current Date is: $formatted")
+//
+//    }
+
+//    fun timeout() = runBlocking {
+//        //sampleStart
+//        val result = withTimeoutOrNull(150000L) {
+//            repeat(10) { i ->
+//                Log.d("I'm sleeping",i.toString())
+//               delay(500L)
+//            }
+//            "Done" // will get cancelled before it produces this result
+//        }
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//        Log.d("Result is ",result.toString())
+////sampleEnd
+//    }
+
+
+
+    fun changehome(){
+
+        val intent1 = Intent(this, Home::class.java)
+        startActivity(intent1)
+
+    }
+
+
+    /*
+
+    private void setScreenTimeout(int millseconds){
+        boolean value = false;
+        if(android.os.Build.VERSION.SDK_INK >= andriod.os.Build.VERSON_CODES>M)}{
+        value = Settings.System.canWrite(getApplicationContext());
+        if(value){
+            Setting.system.putInt(getContentResolver(),Settings.system.SCREEN_OFF_TIMEOUT,milliseconds);
+            success = true;
+        }
+        else{
+            Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+            intent.setData(Uri.parse("package:" + getApplicationContext().getPackageName() ))
+            startActivity(intent);
+        }
+        }
+        else{
+        Setting.System.putInt(getContentResolver(), Setting.System.SCREEN_OFF_TIMEOUT,milliseconds)
+        sucess =  true
+        }
+    }
+    */
+
+
+
+
+
 }

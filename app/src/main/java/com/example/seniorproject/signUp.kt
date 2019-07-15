@@ -46,7 +46,7 @@ class signUp : AppCompatActivity() {
                     }
                     //to check can get data from fierbase
                     val adapter = MessageAdapter(applicationContext, R.layout.signrecord, msgList)
-                    trylist.adapter = adapter
+//                    trylist.adapter = adapter
 
                 }
             }
