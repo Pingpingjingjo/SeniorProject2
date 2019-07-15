@@ -114,7 +114,7 @@ class Result : AppCompatActivity() {
                             var score = scores[disorder]!!
                             for (i in 0 until rangeList!!.size) {
                                 if (i == 0 && score < rangeList[0].min) {
-                                    outputList.add(disorder + ": " + resultList!![4])
+                                    outputList.add(disorder + ": " + resultList!![resultList.size-1])
                                 }
                                 if (score >= rangeList[i].min && score <= rangeList[i].max) {
                                     outputList.add(disorder + ": " + resultList!![i])
