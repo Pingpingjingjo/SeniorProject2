@@ -4,6 +4,7 @@ package com.example.seniorproject
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.util.Log
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -43,15 +44,20 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-            signinBnt.setOnClickListener() {
-                if (Uservalid1()==true) {
-                    MyAppApplication.globalUser = UnameTxt.text.toString()
-                    Page()
-                }
-              // Page()
 
 
-            }//end acceptBtn
+        signinBnt.setOnClickListener() {
+
+            if (Uservalid1()) {
+
+                Log.d("CLicked","clicked")
+                MyAppApplication.globalUser = UnameTxt.text.toString()
+                Page()
+            }
+            // Page()
+
+
+        }//end acceptBtn
 
     }//over ride close
 
@@ -82,10 +88,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun Page() {
-        signinBnt.setOnClickListener {
+
             val intent1 = Intent(this, Home::class.java);
             startActivity(intent1);
-        }
+            this.finish();
+
     }
 
     fun ResetPass() {

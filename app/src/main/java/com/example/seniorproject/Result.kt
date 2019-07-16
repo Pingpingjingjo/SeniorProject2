@@ -2,17 +2,12 @@ package com.example.seniorproject
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.ImageButton
-import android.widget.ListAdapter
-import android.widget.TextView
 import com.example.seniorproject.MyAppApplication.Companion.globalUser
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_result.*
-import kotlinx.android.synthetic.main.activity_test.*
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class Result : AppCompatActivity() {
@@ -30,10 +25,8 @@ class Result : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
-        Log.d("name", MyAppApplication.globalUser)
-
-
         dataReference = FirebaseDatabase.getInstance().getReference("Datas")
+
         dataReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
@@ -41,10 +34,10 @@ class Result : AppCompatActivity() {
             override fun onDataChange(p0: DataSnapshot) {
                 for (item in p0.children) {
                     val c = item.getKey()
-                    Log.d("fuck ", c)
+
                     disorderNameList.add(c!!)
-                    Log.d("hello", disorderNameList[0])
-                }//loop for
+
+                }
 
 
                 val bundle = intent.extras
@@ -67,7 +60,7 @@ class Result : AppCompatActivity() {
 
                             for (item in p0.children) {
                                 var c = item.getValue(Range::class.java)
-                                Log.d("goddamn", c!!.min.toString())
+
                                 rangeList.add(c!!)
                             }
                         }
@@ -76,6 +69,8 @@ class Result : AppCompatActivity() {
 
 
                     var resultList: MutableList<String> = mutableListOf()
+
+
                     var resultReference: DatabaseReference =
                         FirebaseDatabase.getInstance().getReference("Datas/" + disorder + "/Result")
                     resultReference.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -94,10 +89,10 @@ class Result : AppCompatActivity() {
 
                 }
 
-                Thread.sleep(1000)
+                Thread.sleep(300)
 
 
-                var outputList = mutableListOf<String>()
+                var outputList = mutableListOf<ResultData>()
                 for (disorder in disorderNameList) {
 
                     var herpReference: DatabaseReference =
@@ -116,18 +111,28 @@ class Result : AppCompatActivity() {
                             var score = scores[disorder]!!
                             for (i in 0 until rangeList!!.size) {
                                 if (i == 0 && score < rangeList[0].min) {
-                                    outputList.add(disorder + ": " + resultList!![resultList.size-1])
+
+                                    val resultData = ResultData(disorder,score,resultList!![resultList.size-1],0.00);
+                                   // calculate percent here
+                                    outputList.add(resultData);
                                 }
                                 if (score >= rangeList[i].min && score <= rangeList[i].max) {
-                                    outputList.add(disorder + ": " + resultList!![i])
+
+                                    //calculate percent here
+                                    val resultData = ResultData(disorder,score,resultList!![i],0.00);
+                                    outputList.add(resultData)
                                 }
 
                             }
-                            Log.d("goddamn", rangeLists["Depression"]!![0].min.toString())
-                            Log.d("goddamn", outputList[0])
+
+
+
                             val adapter =
-                                ArrayAdapter(applicationContext, android.R.layout.simple_list_item_1, outputList)
+
+                                ResultAdapter(applicationContext, outputList)
+
                             results.adapter = adapter
+
 
 
                         }
@@ -136,7 +141,7 @@ class Result : AppCompatActivity() {
                 }
 
 
-                Thread.sleep(1000)
+                Thread.sleep(300)
 
                 var lolReference: DatabaseReference =
                     FirebaseDatabase.getInstance().getReference("Datas")
@@ -145,32 +150,55 @@ class Result : AppCompatActivity() {
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {
-                        //history bullshit
-                        var usrList: MutableList<String> = mutableListOf()
-                        var usrReference = FirebaseDatabase.getInstance().getReference("History")
-                        usrReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                        //history bullshi
+
+                        val sdf = SimpleDateFormat("dd-M-yyyy_hh:mm:ss")
+                        val currentDate = sdf.format(Date())
+
+                        var addingReference = FirebaseDatabase.getInstance()
+                            .getReference("History/" + globalUser )
+
+                        addingReference.addListenerForSingleValueEvent(object : ValueEventListener{
+
                             override fun onCancelled(p0: DatabaseError) {
+
                             }
 
                             override fun onDataChange(p0: DataSnapshot) {
-                                if (p0!!.exists()) {
-                                    for (i in p0.children) {
-                                        var usr = i.getKey()
-                                        usrList.add(usr!!)
+
+
+                                /*
+                                    History{
+
+                                        userName : {
+
+                                            lastTry1:  disordersScore : {
+                                                {disorder1:score1}, {disorder2:score2},{ disorderN:scoreN}
+                                            } ,
+                                            lastTry2:  disordersScore : {
+                                                {disorder1:score1}, {disorder2:score2},{ disorderN:scoreN}
+                                            } ,
+
+
+                                        }
                                     }
-                                }
+                                 */
+
+
+                                val userMap = HashMap<String,Any>()
+
+                                val lastTry = DateTimeFormatter.ISO_INSTANT.format(Instant.now())
+
+                                userMap["lastTry"] = lastTry;
+
+                                userMap["disorderScores"] = scores
+
+                                addingReference.push().setValue(userMap)
+
                             }
+
                         })
-                        val sdf = SimpleDateFormat("dd-M-yyyy_hh:mm:ss")
-                        val currentDate = sdf.format(Date())
-                        Log.d(" C DATE is  ", currentDate)
-                        var addingReference = FirebaseDatabase.getInstance()
-                            .getReference("History/" + MyAppApplication.globalUser + "/" + currentDate)
-                        for (output in outputList) {
-                            var curRef = addingReference.push()
-                            curRef.setValue(output)
-                            Log.d("the output is", output)
-                        }
+
                     }
 
                 })
@@ -178,26 +206,7 @@ class Result : AppCompatActivity() {
             }
         })
 
-        //// Check time stamp
 
-//        var timeList: MutableList<String> = mutableListOf()
-//        var timeReference: DatabaseReference =
-//            FirebaseDatabase.getInstance().getReference("History/" + globalUser + "/sdf")
-//        timeReference.addListenerForSingleValueEvent(object : ValueEventListener {
-//            override fun onCancelled(p0: DatabaseError) {
-//            }
-//
-//            override fun onDataChange(p0: DataSnapshot) {
-//
-//                for (item in p0.children) {
-//                    var c = item.getValue(String::class.java)
-//                    resultList.add(c!!)
-//                }
-//            }
-//        })
-//        resultLists[disorder] = resultList
-//
-//    }
 
 
 

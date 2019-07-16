@@ -1,26 +1,31 @@
 package com.example.seniorproject
 
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
+import android.opengl.Visibility
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
 import android.widget.RadioButton
-import android.widget.TextView
-import com.google.firebase.FirebaseError
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.activity_knowledge2.*
 import kotlinx.android.synthetic.main.activity_test.*
-import kotlinx.android.synthetic.main.activity_test_try.*
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
-import java.util.ArrayList
-import kotlinx.coroutines.*
-
-
+import java.util.*
+import kotlin.collections.HashMap
+import kotlin.collections.MutableList
+import kotlin.collections.MutableMap
+import kotlin.collections.mutableListOf
+import kotlin.collections.mutableMapOf
+import kotlin.collections.set
+import kotlin.collections.shuffle
+import com.google.firebase.database.DataSnapshot
+import java.time.*
 
 
 class TestTry : AppCompatActivity() {
@@ -35,17 +40,29 @@ class TestTry : AppCompatActivity() {
     val Blue = Color.parseColor("#63ace5")
     val White = Color.parseColor("#e7eff6");
 
+    lateinit var context: Context
+
+    lateinit var activity: Activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_test)
-//        Log.d("woohoo ", "IM IN TEST TRY BITCHES")
-//        timeout()
 
-
-
-
+        //initlizaed disorder scores
         dataReference = FirebaseDatabase.getInstance().getReference("Datas")
+
+        radioButton1.visibility = View.INVISIBLE
+        radioButton2.visibility = View.INVISIBLE
+        radioButton3.visibility  =View.INVISIBLE
+        radioButton4.visibility  =View.INVISIBLE
+        preBtn.visibility = View.INVISIBLE
+        nextBtn.text = "เริ่ม"
+
+        context = this;
+
+        activity= this;
         dataReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
@@ -53,10 +70,10 @@ class TestTry : AppCompatActivity() {
             override fun onDataChange(p0: DataSnapshot) {
                 for (item in p0.children) {
                     val c = item.getKey()
-                    Log.d("fuck ", c)
+              //      Log.d("Disorders ", c)
+                //      Log.d("Full Data",item.toString());
                     disorderNameList.add(c!!)
-                    Log.d("hello",disorderNameList[0])
-                }//loop for
+                }
 
 
                 for (item in disorderNameList) {
@@ -70,35 +87,61 @@ class TestTry : AppCompatActivity() {
         var i: Int = -1
         var firstTime: Boolean = true
 
-
-
         nextBtn.setOnClickListener {
+
             if (firstTime) {
+
                 for (item in disorderNameList) {
+
                     joined.addAll(questionLists[item]!!)
                 }
+
                 joined.shuffle()
+
                 firstTime = false
+
+                radioButton1.visibility = View.VISIBLE
+                radioButton2.visibility = View.VISIBLE
+                radioButton3.visibility  =View.VISIBLE
+                radioButton4.visibility  =View.VISIBLE
+
+                nextBtn.text = "ถัดไป"
             }
 
-            i++
+                i++
 
-            if (i == joined.size) {
-                //i = joined.size -1
-                testTxt.setText(" สิ้นสุดการประเมิณ กดปุ่มถัดไปเพื่อดูผลการประเมิน")
-            }
-            if (i > joined.size) {
-                Log.d("finalA", scores["Depression"].toString())
-                Log.d("finalD", scores["Anxiety"].toString())
-                PageChange()
-            }
+                if(i>0){
 
-            if (i < joined.size) {
-                testTxt.setText(joined[i].Question)
-                disorderFunction(joined[i].type)
-                Clear()
 
-            }
+                    preBtn.visibility = View.VISIBLE
+
+                }else{
+
+                    preBtn.visibility = View.INVISIBLE
+                }
+
+                when {
+                    i == joined.size -> //i = joined.size -1
+
+                        testTxt.text = " สิ้นสุดการประเมิณ กดปุ่มถัดไปเพื่อดูผลการประเมิน"
+
+
+                    i > joined.size -> {
+
+
+                        PageChange()
+                    }
+                    i < joined.size -> {
+
+                        testTxt.setText(joined[i].Question)
+                        disorderFunction(joined[i].type)
+                        Clear()
+
+                    }
+                }
+
+
+
         }//btn
 
 
@@ -114,6 +157,8 @@ class TestTry : AppCompatActivity() {
             i--
             if(i<0){
                 i=0
+
+                preBtn.visibility = View.INVISIBLE
             }
             if (i >= 0) {
 
@@ -127,15 +172,66 @@ class TestTry : AppCompatActivity() {
     }
 
 
+    override fun onPostResume() {
+        super.onPostResume()
+
+        val userHistoryRef : DatabaseReference = FirebaseDatabase.getInstance().getReference("History").child(MyAppApplication.globalUser.toString())
+
+        val queryRef = userHistoryRef.orderByChild("lastTry").limitToLast(1)
+
+        queryRef.addListenerForSingleValueEvent(object : ValueEventListener{
+
+            override fun onCancelled(p0: DatabaseError) {
+
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+
+                for (ds in p0.getChildren()) {
+                    val key = ds.getKey()
+                    val lastTry = ds.child("lastTry").getValue(String::class.java)
+                    Log.d("last try", lastTry)
+                    val lastTime =  OffsetDateTime.parse(lastTry)
+                    val curretnTime = OffsetDateTime.now()
+
+                    var days = Duration.between(lastTime, curretnTime).toDays()
+
+                    if(days <7){
+                        val builder = AlertDialog.Builder(context)
+
+                        builder.setMessage("กรุณา ทําแบบตรวจสอบ หลังจาก "+(7 - days) +"วัน")
+
+                        builder.setPositiveButton("คกลง"){dialog, which ->
+                            // Do something when user press the positive button
+
+                          //  activity.finish();
+                        }
+
+                        var dialog  = builder.create();
+
+                        dialog.setCanceledOnTouchOutside(false);
+
+                        dialog.setCancelable(false)
+
+                        dialog.show()
+                    }
+                }
+
+            }
+
+        })
+    }
+
+
     fun getData(disorder: String) {
-        Log.d("hello","imhere")
 
         //------------ Question ----------------
 
         var questionList: MutableList<TestRecord> = mutableListOf()
         var questionReference: DatabaseReference =
             FirebaseDatabase.getInstance().getReference("Datas/" + disorder + "/Question")
-        Log.d("hello","Datas/" + disorder + "/Question")
+      //  Log.d("hello","Datas/" + disorder + "/Question")
         questionReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
@@ -144,7 +240,7 @@ class TestTry : AppCompatActivity() {
 
                 for (item in p0.children) {
                     val c = item.getValue(String::class.java)
-                    Log.d("question", c)
+                        //    Log.d("question", c)
                     questionList.add(TestRecord(c!!, disorder))
                 }
             }
@@ -163,7 +259,7 @@ class TestTry : AppCompatActivity() {
 
                 for (item in p0.children) {
                     val c = item.getValue(String::class.java)
-                    Log.d("choice", c)
+                 //   Log.d("choice", c)
                     choiceList.add(c!!)
                 }
             }
@@ -189,10 +285,6 @@ class TestTry : AppCompatActivity() {
         scoreLists[disorder] = scoreList
 
 
-
-
-
-
     }
 
 
@@ -214,7 +306,7 @@ class TestTry : AppCompatActivity() {
                     radioButton4.setChecked(false)
 
                 }
-                if (radioButton2 == checked) {
+                else if (radioButton2 == checked) {
                     scores[disorder] = scores[disorder]!! + scoreLists[disorder]!![1].toInt()!!
                     Ctxt2.setBackgroundColor(Blue)
                     Ctxt1.setBackgroundColor(White)
@@ -225,7 +317,7 @@ class TestTry : AppCompatActivity() {
                     radioButton4.setChecked(false)
                 }
 
-                if (radioButton3 == checked) {
+               else if (radioButton3 == checked) {
                     scores[disorder] = scores[disorder]!! + scoreLists[disorder]!![2].toInt()!!
                     Ctxt1.setBackgroundColor(White)
                     Ctxt2.setBackgroundColor(White)
@@ -236,7 +328,7 @@ class TestTry : AppCompatActivity() {
                     radioButton4.setChecked(false)
 
                 }
-                if (radioButton4 == checked) {
+               else if (radioButton4 == checked) {
                     scores[disorder] = scores[disorder]!! + scoreLists[disorder]!![3].toInt()!!
                     Ctxt1.setBackgroundColor(White)
                     Ctxt2.setBackgroundColor(White)
@@ -284,6 +376,8 @@ class TestTry : AppCompatActivity() {
             intent1.putExtra(disorder, scores[disorder])
         }
         startActivity(intent1)
+
+        activity.finish();
     }
 
 //    fun timestamp(args: Array<String>) {
