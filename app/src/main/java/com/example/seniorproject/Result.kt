@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.ListAdapter
 import android.widget.TextView
+import com.example.seniorproject.MyAppApplication.Companion.globalUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_result.*
@@ -22,6 +23,7 @@ class Result : AppCompatActivity() {
     var scores: MutableMap<String, Int> = mutableMapOf()
     var rangeLists: MutableMap<String, MutableList<Range>> = mutableMapOf()
     var resultLists: MutableMap<String, MutableList<String>> = mutableMapOf()
+    var timeList: MutableMap<String, MutableList<String>> = mutableMapOf()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -176,8 +178,31 @@ class Result : AppCompatActivity() {
             }
         })
 
+        //// Check time stamp
 
-    }
+//        var timeList: MutableList<String> = mutableListOf()
+//        var timeReference: DatabaseReference =
+//            FirebaseDatabase.getInstance().getReference("History/" + globalUser + "/sdf")
+//        timeReference.addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onCancelled(p0: DatabaseError) {
+//            }
+//
+//            override fun onDataChange(p0: DataSnapshot) {
+//
+//                for (item in p0.children) {
+//                    var c = item.getValue(String::class.java)
+//                    resultList.add(c!!)
+//                }
+//            }
+//        })
+//        resultLists[disorder] = resultList
+//
+//    }
+
+
+
+
+    } //end overide
 
 
 }// finish program
