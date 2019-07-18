@@ -21,6 +21,10 @@ import kotlin.collections.set
 import kotlin.collections.shuffle
 import com.google.firebase.database.DataSnapshot
 import java.time.*
+import com.google.firebase.storage.StorageException
+import android.support.annotation.NonNull
+
+
 
 
 class TestTry : AppCompatActivity() {
@@ -71,7 +75,11 @@ class TestTry : AppCompatActivity() {
         nextBtn.text = "เริ่ม"
 
         dataReference.addListenerForSingleValueEvent(object : ValueEventListener {
+
+
             override fun onCancelled(p0: DatabaseError) {
+
+                Log.d("firebase error" ,p0.details)
             }
 
             override fun onDataChange(p0: DataSnapshot) {
@@ -439,7 +447,10 @@ class TestTry : AppCompatActivity() {
     private fun checkInterval(){
 
         val userHistoryRef : DatabaseReference = FirebaseDatabase.getInstance().getReference("History")
+
             .child(MyAppApplication.globalUser.toString())
+
+        Log.d("checking","tet")
 
         val queryRef = userHistoryRef.orderByChild("lastTry").limitToLast(1)
 
@@ -452,40 +463,46 @@ class TestTry : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
 
-                for (ds in p0.getChildren()) {
-                    val key = ds.getKey()
-                    val lastTry = ds.child("lastTry").getValue(String::class.java)
-                    Log.d("last try", lastTry)
-                    val lastTime =  OffsetDateTime.parse(lastTry)
-                    val curretnTime = OffsetDateTime.now()
+                if(p0.childrenCount < 1){
+                    init()
+                }else{
 
-                    var days = Duration.between(lastTime, curretnTime).toDays()
+                    for (ds in p0.children) {
+                        val key = ds.getKey()
+                        val lastTry = ds.child("lastTry").getValue(String::class.java)
+                        Log.d("last try", lastTry)
+                        val lastTime =  OffsetDateTime.parse(lastTry)
+                        val curretnTime = OffsetDateTime.now()
 
-                    if(days <7){
-                        val builder = AlertDialog.Builder(context)
+                        var days = Duration.between(lastTime, curretnTime).toDays()
 
-                        builder.setMessage("กรุณา ทําแบบตรวจสอบ หลังจาก "+(7 - days) +"วัน")
+                        if(days <7){
+                            val builder = AlertDialog.Builder(context)
 
-                        builder.setPositiveButton("คกลง"){dialog, which ->
-                            // Do something when user press the positive button
+                            builder.setMessage("กรุณา ทําแบบตรวจสอบ หลังจาก "+(7 - days) +"วัน")
 
-                            //  activity.finish();
+                            builder.setPositiveButton("คกลง"){dialog, which ->
+                                // Do something when user press the positive button
+
+                                //  activity.finish();
+                            }
+
+                            var dialog  = builder.create();
+
+                            dialog.setCanceledOnTouchOutside(false);
+
+                            dialog.setCancelable(false)
+
+                            dialog.show()
+
+                            init()
+                        }else{
+
+                            init()
+
                         }
+                }
 
-                        var dialog  = builder.create();
-
-                        dialog.setCanceledOnTouchOutside(false);
-
-                        dialog.setCancelable(false)
-
-                        dialog.show()
-
-                        init()
-                    }else{
-
-                        init()
-
-                    }
                 }
 
             }

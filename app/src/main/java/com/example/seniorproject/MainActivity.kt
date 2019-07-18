@@ -29,11 +29,17 @@ class MainActivity : AppCompatActivity() {
         dataReference = FirebaseDatabase.getInstance().getReference("Profile")
         dataReference.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
+
+
+                Log.d("firebase error" ,p0.details)
             }
 
             override fun onDataChange(p0: DataSnapshot) {
+
+                Log.d("userList",p0.toString())
                 if (p0!!.exists()) {
                     msgList.clear()
+
                     for (i in p0.children) {
                         val SignUpRecord = i.getValue(SignUpRecord::class.java)
                         msgList.add(SignUpRecord!!)
@@ -91,7 +97,7 @@ class MainActivity : AppCompatActivity() {
 
             val intent1 = Intent(this, Home::class.java);
             startActivity(intent1);
-            this.finish();
+         //   this.finish();
 
     }
 
