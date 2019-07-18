@@ -25,8 +25,6 @@ import com.google.firebase.storage.StorageException
 import android.support.annotation.NonNull
 
 
-
-
 class TestTry : AppCompatActivity() {
 
     lateinit var dataReference: DatabaseReference
@@ -51,7 +49,7 @@ class TestTry : AppCompatActivity() {
 
         context = this;
 
-        activity= this;
+        activity = this;
 
 
     }
@@ -66,9 +64,9 @@ class TestTry : AppCompatActivity() {
 
         radioButton2.visibility = View.INVISIBLE
 
-        radioButton3.visibility  =View.INVISIBLE
+        radioButton3.visibility = View.INVISIBLE
 
-        radioButton4.visibility  =View.INVISIBLE
+        radioButton4.visibility = View.INVISIBLE
 
         preBtn.visibility = View.INVISIBLE
 
@@ -79,7 +77,7 @@ class TestTry : AppCompatActivity() {
 
             override fun onCancelled(p0: DatabaseError) {
 
-                Log.d("firebase error" ,p0.details)
+                Log.d("firebase error", p0.details)
             }
 
             override fun onDataChange(p0: DataSnapshot) {
@@ -111,7 +109,7 @@ class TestTry : AppCompatActivity() {
         var questionList: MutableList<TestRecord> = mutableListOf()
         var questionReference: DatabaseReference =
             FirebaseDatabase.getInstance().getReference("Datas/" + disorder + "/Question")
-      //  Log.d("hello","Datas/" + disorder + "/Question")
+        //  Log.d("hello","Datas/" + disorder + "/Question")
         questionReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
@@ -120,7 +118,7 @@ class TestTry : AppCompatActivity() {
 
                 for (item in p0.children) {
                     val c = item.getValue(String::class.java)
-                        //    Log.d("question", c)
+                    //    Log.d("question", c)
                     questionList.add(TestRecord(c!!, disorder))
                 }
             }
@@ -139,7 +137,7 @@ class TestTry : AppCompatActivity() {
 
                 for (item in p0.children) {
                     val c = item.getValue(String::class.java)
-                 //   Log.d("choice", c)
+                    //   Log.d("choice", c)
                     choiceList.add(c!!)
                 }
             }
@@ -182,9 +180,11 @@ class TestTry : AppCompatActivity() {
 
     }
 
-    fun addPoint(disorder: String) : Int{
+    fun addPoint(disorder: String): Int {
+
 
         var score :Int = -1
+
         if (radioButton1.isChecked()) {
 
             score = scoreLists[disorder]!![0]
@@ -197,8 +197,7 @@ class TestTry : AppCompatActivity() {
             radioButton3.setChecked(false)
             radioButton4.setChecked(false)
 
-        }
-        else if (radioButton2.isChecked()) {
+        } else if (radioButton2.isChecked()) {
             score = scoreLists[disorder]!![1]
             scores[disorder] = scores[disorder]!! + scoreLists[disorder]!![1].toInt()!!
             Ctxt2.setBackgroundColor(Blue)
@@ -208,9 +207,7 @@ class TestTry : AppCompatActivity() {
             radioButton1.setChecked(false)
             radioButton3.setChecked(false)
             radioButton4.setChecked(false)
-        }
-
-        else if (radioButton3.isChecked()) {
+        } else if (radioButton3.isChecked()) {
 
             score = scoreLists[disorder]!![2]
 
@@ -223,8 +220,7 @@ class TestTry : AppCompatActivity() {
             radioButton1.setChecked(false)
             radioButton4.setChecked(false)
 
-        }
-        else if (radioButton4.isChecked()) {
+        } else if (radioButton4.isChecked()) {
 
             score = scoreLists[disorder]!![3
             ]
@@ -243,7 +239,7 @@ class TestTry : AppCompatActivity() {
         return score
     }
 
-    fun Clear(){
+    fun Clear() {
 
         Ctxt1.setBackgroundColor(White)
         Ctxt2.setBackgroundColor(White)
@@ -259,10 +255,10 @@ class TestTry : AppCompatActivity() {
     private fun PageChange() {
         //page transition
         val intent1 = Intent(this, Result::class.java)
-        for (disorder in disorderNameList){
+        for (disorder in disorderNameList) {
             intent1.putExtra(disorder, scores[disorder])
 
-            Log.d("Send with",disorder + " " + scores[disorder])
+            Log.d("Send with", disorder + " " + scores[disorder])
         }
         startActivity(intent1)
 
@@ -284,8 +280,7 @@ class TestTry : AppCompatActivity() {
                     radioButton3.setChecked(false)
                     radioButton4.setChecked(false)
 
-                }
-                else if (radioButton2 == checked) {
+                } else if (radioButton2 == checked) {
 
                     Ctxt2.setBackgroundColor(Blue)
                     Ctxt1.setBackgroundColor(White)
@@ -294,9 +289,7 @@ class TestTry : AppCompatActivity() {
                     radioButton1.setChecked(false)
                     radioButton3.setChecked(false)
                     radioButton4.setChecked(false)
-                }
-
-                else if (radioButton3 == checked) {
+                } else if (radioButton3 == checked) {
 
                     Ctxt1.setBackgroundColor(White)
                     Ctxt2.setBackgroundColor(White)
@@ -306,8 +299,7 @@ class TestTry : AppCompatActivity() {
                     radioButton1.setChecked(false)
                     radioButton4.setChecked(false)
 
-                }
-                else if (radioButton4 == checked) {
+                } else if (radioButton4 == checked) {
 
                     Ctxt1.setBackgroundColor(White)
                     Ctxt2.setBackgroundColor(White)
@@ -322,11 +314,7 @@ class TestTry : AppCompatActivity() {
     }
 
 
-
-
-
-
-    private fun init(){
+    private fun init() {
 
         var savedScore = ArrayList<Int>()
 
@@ -359,8 +347,8 @@ class TestTry : AppCompatActivity() {
 
                 radioButton1.visibility = View.VISIBLE
                 radioButton2.visibility = View.VISIBLE
-                radioButton3.visibility  =View.VISIBLE
-                radioButton4.visibility  =View.VISIBLE
+                radioButton3.visibility = View.VISIBLE
+                radioButton4.visibility = View.VISIBLE
 
                 nextBtn.text = "ถัดไป"
             }
@@ -368,7 +356,6 @@ class TestTry : AppCompatActivity() {
 
 
             i++
-
 
 
             when {
@@ -384,7 +371,7 @@ class TestTry : AppCompatActivity() {
                 }
                 i < joined.size -> {
 
-                    if(i>0){
+                    if (i > 0) {
 
                         val point = addPoint(joined[i-1].type)
 
@@ -395,6 +382,7 @@ class TestTry : AppCompatActivity() {
 
                             savedScore.add(addPoint(joined[i-1].type))
                         }
+
 
                     }
 
@@ -419,9 +407,7 @@ class TestTry : AppCompatActivity() {
             }
 
 
-
         }//btn
-
 
 
         preBtn.setOnClickListener {
@@ -429,19 +415,18 @@ class TestTry : AppCompatActivity() {
 
             i--
 
-            if(i<=0){
+            if (i <= 0) {
 
-                i=0
+                i = 0
 
                 preBtn.visibility = View.INVISIBLE
-
 
 
             }
             if (i >= 0) {
 
                 Log.d("Current Index", i.toString())
-                scores[joined[i].type] =- savedScore[i]
+                scores[joined[i].type] = -savedScore[i]
 
                 savedScore.remove(i)
 
@@ -457,30 +442,37 @@ class TestTry : AppCompatActivity() {
     }
 
 
-    private fun checkInterval(){
+    private fun checkInterval() {
 
-        val userHistoryRef : DatabaseReference = FirebaseDatabase.getInstance().getReference("History")
+        val userHistoryRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("History")
 
             .child(MyAppApplication.globalUser.toString())
 
         /*notsure bout this, please delete if wrong
         userHistoryRef.addListenerForSingleValueEvent(object : ValueEventListener{
+
+        Log.d("checking", "tet")
+        //notsure bout this, please delete if wrong
+        userHistoryRef.addListenerForSingleValueEvent(object : ValueEventListener {
+
             override fun onCancelled(p0: DatabaseError) {
 
             }
+
             override fun onDataChange(p0: DataSnapshot) {
-                    if (!p0.exists()){
-                        init()
-                        return
-                    }
+                if (!p0.exists()) {
+                    init()
+                    return
+                }
             }
         })
+
         */
 
 
         val queryRef = userHistoryRef.orderByChild("lastTry").limitToLast(1)
 
-        queryRef.addListenerForSingleValueEvent(object : ValueEventListener{
+        queryRef.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onCancelled(p0: DatabaseError) {
 
@@ -489,36 +481,37 @@ class TestTry : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
 
-                if(p0.childrenCount < 1){
+                if (p0.childrenCount < 1) {
                     init()
-                }else{
+                } else {
 
                     for (ds in p0.children) {
                         val key = ds.getKey()
                         val lastTry = ds.child("lastTry").getValue(String::class.java)
                         Log.d("last try", lastTry)
-                        val lastTime =  OffsetDateTime.parse(lastTry)
+                        val lastTime = OffsetDateTime.parse(lastTry)
                         val curretnTime = OffsetDateTime.now()
 
                         var days = Duration.between(lastTime, curretnTime).toDays()
 
 
-                        if(days <7){
+
+                        if (days < 7) {
                             val builder = AlertDialog.Builder(context)
 
 
-
-                        builder.setMessage("กรุณา ทําแบบตรวจสอบ หลังจาก "+(14 - days) +"วัน")
-
+                            builder.setMessage("กรุณา ทําแบบตรวจสอบ หลังจาก " + (14 - days) + "วัน")
 
 
-                            builder.setPositiveButton("คกลง"){dialog, which ->
+
+                            builder.setPositiveButton("คกลง") { dialog, which ->
                                 // Do something when user press the positive button
 
                                 //  activity.finish();
                             }
 
-                            var dialog  = builder.create();
+
+                            var dialog = builder.create();
 
                             dialog.setCanceledOnTouchOutside(false);
 
@@ -527,12 +520,12 @@ class TestTry : AppCompatActivity() {
                             dialog.show()
 
                             init()
-                        }else{
+                        } else {
 
                             init()
 
                         }
-                }
+                    }
 
                 }
 
