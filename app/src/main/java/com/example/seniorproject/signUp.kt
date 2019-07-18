@@ -105,7 +105,6 @@ class signUp : AppCompatActivity() {
             //String().md5()
             //Log.d("try MD5",md.toString())
 
-
             return true
         } else {
             passTxt2.error = "รหัสไม่ตรงกัน1"
@@ -136,6 +135,7 @@ class signUp : AppCompatActivity() {
             SignUpRecord(id.toString(), nameTxt.text.toString(), AgeTxt.text.toString(), passtxt1.text.toString().md5()
                 ,gender)
         tempRef.setValue(users)
+        MyAppApplication.globalUser = nameTxt.text.toString()
         Toast.makeText(applicationContext,"บันทึก",Toast.LENGTH_SHORT).show()
     }
 

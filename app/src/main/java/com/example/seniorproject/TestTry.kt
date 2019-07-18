@@ -184,7 +184,7 @@ class TestTry : AppCompatActivity() {
 
     fun addPoint(disorder: String) : Int{
 
-        var score :Int = 0
+        var score :Int = -1
         if (radioButton1.isChecked()) {
 
             score = scoreLists[disorder]!![0]
@@ -237,6 +237,8 @@ class TestTry : AppCompatActivity() {
             radioButton3.setChecked(false)
             radioButton1.setChecked(false)
         }
+
+
 
         return score
     }
@@ -367,15 +369,7 @@ class TestTry : AppCompatActivity() {
 
             i++
 
-            if(i>0){
 
-
-                preBtn.visibility = View.VISIBLE
-
-            }else{
-
-                preBtn.visibility = View.INVISIBLE
-            }
 
             when {
                 i == joined.size -> //i = joined.size -1
@@ -392,7 +386,16 @@ class TestTry : AppCompatActivity() {
 
                     if(i>0){
 
-                       savedScore.add(addPoint(joined[i-1].type))
+                        val point = addPoint(joined[i-1].type)
+
+                        if(point <0){
+                            i--
+
+                        }else{
+
+                            savedScore.add(addPoint(joined[i-1].type))
+                        }
+
                     }
 
 
@@ -403,6 +406,16 @@ class TestTry : AppCompatActivity() {
                     Clear()
 
                 }
+            }
+
+            if(i>0){
+
+
+                preBtn.visibility = View.VISIBLE
+
+            }else{
+
+                preBtn.visibility = View.INVISIBLE
             }
 
 
@@ -450,10 +463,7 @@ class TestTry : AppCompatActivity() {
 
             .child(MyAppApplication.globalUser.toString())
 
-<<<<<<< HEAD
-        Log.d("checking","tet")
-=======
-        //notsure bout this, please delete if wrong
+        /*notsure bout this, please delete if wrong
         userHistoryRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
 
@@ -465,8 +475,8 @@ class TestTry : AppCompatActivity() {
                     }
             }
         })
-        //
->>>>>>> a725da00da9af421f320d9a68d38edb6501ba4a1
+        */
+
 
         val queryRef = userHistoryRef.orderByChild("lastTry").limitToLast(1)
 
@@ -492,17 +502,15 @@ class TestTry : AppCompatActivity() {
 
                         var days = Duration.between(lastTime, curretnTime).toDays()
 
-<<<<<<< HEAD
+
                         if(days <7){
                             val builder = AlertDialog.Builder(context)
 
-                            builder.setMessage("กรุณา ทําแบบตรวจสอบ หลังจาก "+(7 - days) +"วัน")
-=======
+
+
                         builder.setMessage("กรุณา ทําแบบตรวจสอบ หลังจาก "+(14 - days) +"วัน")
 
-                        builder.setPositiveButton("ตกลง"){dialog, which ->
-                            // Do something when user press the positive button
->>>>>>> a725da00da9af421f320d9a68d38edb6501ba4a1
+
 
                             builder.setPositiveButton("คกลง"){dialog, which ->
                                 // Do something when user press the positive button
