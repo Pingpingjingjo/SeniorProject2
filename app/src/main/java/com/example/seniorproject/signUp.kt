@@ -14,6 +14,8 @@ import java.util.concurrent.CountDownLatch
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.FirebaseError
 import com.google.firebase.database.ValueEventListener
+import java.math.BigInteger
+import java.security.MessageDigest
 
 //import sun.font.GlyphLayout.done
 
@@ -24,6 +26,9 @@ class signUp : AppCompatActivity() {
     lateinit var msgList: MutableList<SignUpRecord>
     //var sp:TextView? = ui
     var gender =""
+
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,6 +102,10 @@ class signUp : AppCompatActivity() {
         var a = passtxt1.text.toString()
         var b = passTxt2.text.toString()
         if (a.equals(b)) {
+            //String().md5()
+            //Log.d("try MD5",md.toString())
+
+
             return true
         } else {
             passTxt2.error = "รหัสไม่ตรงกัน1"
@@ -124,7 +133,8 @@ class signUp : AppCompatActivity() {
 
         var tempRef = myRef.push()
         val users =
-            SignUpRecord(id.toString(), nameTxt.text.toString(), AgeTxt.text.toString(), passtxt1.text.toString(),gender)
+            SignUpRecord(id.toString(), nameTxt.text.toString(), AgeTxt.text.toString(), passtxt1.text.toString().md5()
+                ,gender)
         tempRef.setValue(users)
         Toast.makeText(applicationContext,"บันทึก",Toast.LENGTH_SHORT).show()
     }
@@ -144,5 +154,10 @@ class signUp : AppCompatActivity() {
     fun ResetName() {
         nameTxt.error = "ชื่อนี้ได้ถูกใข้ไปแล้ว"
         nameTxt.setText("");
+    }
+
+    fun String.md5(): String{
+        val md = MessageDigest.getInstance("MD5")
+        return BigInteger(1, md.digest(toByteArray())).toString(16).padStart(32,'0')
     }
 }//End program

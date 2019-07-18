@@ -8,12 +8,15 @@ import android.util.Log
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.math.BigInteger
+import java.security.MessageDigest
 
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var dataReference: DatabaseReference
     lateinit var msgList: MutableList<SignUpRecord>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +73,9 @@ class MainActivity : AppCompatActivity() {
     fun Uservalid1(): Boolean {
         for (record in msgList) {
             if (record.name.equals(UnameTxt.text.toString()) ) {
-                if (record.password.equals(PwordTxt.text.toString())) {
+                if (record.password.equals(PwordTxt.text.toString().md5())) {
+                            //String().md5()
+                            Log.d("try MD5",PwordTxt.text.toString().md5())
                             return true
                 }
                 else {
@@ -108,5 +113,10 @@ class MainActivity : AppCompatActivity() {
     fun ResetName() {
         UnameTxt.error = "ชื่อผู้ใช้ไม่ถูกต้อง"
         UnameTxt.setText("");
+    }
+
+    fun String.md5(): String{
+        val md = MessageDigest.getInstance("MD5")
+        return BigInteger(1, md.digest(toByteArray())).toString(16).padStart(32,'0')
     }
 } // Biggest close

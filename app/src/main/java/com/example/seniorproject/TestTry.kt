@@ -450,7 +450,23 @@ class TestTry : AppCompatActivity() {
 
             .child(MyAppApplication.globalUser.toString())
 
+<<<<<<< HEAD
         Log.d("checking","tet")
+=======
+        //notsure bout this, please delete if wrong
+        userHistoryRef.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+            override fun onDataChange(p0: DataSnapshot) {
+                    if (!p0.exists()){
+                        init()
+                        return
+                    }
+            }
+        })
+        //
+>>>>>>> a725da00da9af421f320d9a68d38edb6501ba4a1
 
         val queryRef = userHistoryRef.orderByChild("lastTry").limitToLast(1)
 
@@ -476,10 +492,17 @@ class TestTry : AppCompatActivity() {
 
                         var days = Duration.between(lastTime, curretnTime).toDays()
 
+<<<<<<< HEAD
                         if(days <7){
                             val builder = AlertDialog.Builder(context)
 
                             builder.setMessage("กรุณา ทําแบบตรวจสอบ หลังจาก "+(7 - days) +"วัน")
+=======
+                        builder.setMessage("กรุณา ทําแบบตรวจสอบ หลังจาก "+(14 - days) +"วัน")
+
+                        builder.setPositiveButton("ตกลง"){dialog, which ->
+                            // Do something when user press the positive button
+>>>>>>> a725da00da9af421f320d9a68d38edb6501ba4a1
 
                             builder.setPositiveButton("คกลง"){dialog, which ->
                                 // Do something when user press the positive button
