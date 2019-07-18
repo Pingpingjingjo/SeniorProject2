@@ -441,6 +441,20 @@ class TestTry : AppCompatActivity() {
         val userHistoryRef : DatabaseReference = FirebaseDatabase.getInstance().getReference("History")
             .child(MyAppApplication.globalUser.toString())
 
+        //notsure bout this, please delete if wrong
+        userHistoryRef.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+            override fun onDataChange(p0: DataSnapshot) {
+                    if (!p0.exists()){
+                        init()
+                        return
+                    }
+            }
+        })
+        //
+
         val queryRef = userHistoryRef.orderByChild("lastTry").limitToLast(1)
 
         queryRef.addListenerForSingleValueEvent(object : ValueEventListener{
