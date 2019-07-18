@@ -26,7 +26,6 @@ class signUp : AppCompatActivity() {
     lateinit var msgList: MutableList<SignUpRecord>
     //var sp:TextView? = ui
     var gender =""
-    val md = MessageDigest.getInstance("MD5")
 
 
 
@@ -103,8 +102,8 @@ class signUp : AppCompatActivity() {
         var a = passtxt1.text.toString()
         var b = passTxt2.text.toString()
         if (a.equals(b)) {
-            String().md5()
-            Log.d("try MD5",md.toString())
+            //String().md5()
+            //Log.d("try MD5",md.toString())
 
 
             return true
@@ -134,8 +133,8 @@ class signUp : AppCompatActivity() {
 
         var tempRef = myRef.push()
         val users =
-            SignUpRecord(id.toString(), nameTxt.text.toString(), AgeTxt.text.toString(), passtxt1.text.toString()
-                ,gender, md.toString())
+            SignUpRecord(id.toString(), nameTxt.text.toString(), AgeTxt.text.toString(), passtxt1.text.toString().md5()
+                ,gender)
         tempRef.setValue(users)
         Toast.makeText(applicationContext,"บันทึก",Toast.LENGTH_SHORT).show()
     }
@@ -158,6 +157,7 @@ class signUp : AppCompatActivity() {
     }
 
     fun String.md5(): String{
+        val md = MessageDigest.getInstance("MD5")
         return BigInteger(1, md.digest(toByteArray())).toString(16).padStart(32,'0')
     }
 }//End program

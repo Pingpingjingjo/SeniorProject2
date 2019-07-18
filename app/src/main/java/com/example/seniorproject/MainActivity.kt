@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var dataReference: DatabaseReference
     lateinit var msgList: MutableList<SignUpRecord>
-    val md = MessageDigest.getInstance("MD5")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,9 +67,9 @@ class MainActivity : AppCompatActivity() {
     fun Uservalid1(): Boolean {
         for (record in msgList) {
             if (record.name.equals(UnameTxt.text.toString()) ) {
-                if (record.password.equals(PwordTxt.text.toString())) {
-                            String().md5()
-                            Log.d("try MD5",md.toString())
+                if (record.password.equals(PwordTxt.text.toString().md5())) {
+                            //String().md5()
+                            Log.d("try MD5",PwordTxt.text.toString().md5())
                             return true
                 }
                 else {
@@ -111,6 +110,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun String.md5(): String{
+        val md = MessageDigest.getInstance("MD5")
         return BigInteger(1, md.digest(toByteArray())).toString(16).padStart(32,'0')
     }
 } // Biggest close
