@@ -33,7 +33,7 @@ class Result : AppCompatActivity() {
 
         listView = findViewById(R.id.results)
 
-        dataReference = FirebaseDatabase.getInstance().getReference("Datas")
+        dataReference = FirebaseDatabase.getInstance().getReference("Data4")
 
         dataReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -124,7 +124,7 @@ class Result : AppCompatActivity() {
 
             val herpReference: DatabaseReference =
                 FirebaseDatabase.getInstance()
-                    .getReference("Datas/" + disorder + "/Result")
+                    .getReference("Data4/" + disorder + "/Result")
             herpReference.addListenerForSingleValueEvent(object :
                 ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
@@ -195,7 +195,7 @@ class Result : AppCompatActivity() {
             var tempResultList: MutableList<String> = mutableListOf()
 
             var resultReference: DatabaseReference =
-                FirebaseDatabase.getInstance().getReference("Datas/" + disorder + "/Result")
+                FirebaseDatabase.getInstance().getReference("Data4/" + disorder + "/Result")
             resultReference.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
                 }
@@ -228,7 +228,7 @@ class Result : AppCompatActivity() {
 
            var tempRangList: MutableList<Range> = mutableListOf()
            var rangeReference: DatabaseReference =
-               FirebaseDatabase.getInstance().getReference("Datas/" + disorder + "/Score")
+               FirebaseDatabase.getInstance().getReference("Data4/" + disorder + "/Score")
            rangeReference.addListenerForSingleValueEvent(object : ValueEventListener {
                override fun onCancelled(p0: DatabaseError) {
                }
