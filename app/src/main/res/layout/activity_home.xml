@@ -6,71 +6,81 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".Home"
-        android:background="#ffffff"
-        android:backgroundTint="#ffffff">
-
-    <ImageButton
-
-            android:layout_width="322dp"
-            android:layout_height="103dp"
-            app:srcCompat="@drawable/test"
-            android:id="@+id/testBtn"
-            android:scaleType="centerCrop"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:foregroundTint="#CECFCF"
-            android:soundEffectsEnabled="true"
-            android:backgroundTint="#ffffff" android:layout_marginTop="36dp"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.424"/>
+        android:background="@drawable/colorbg">
 
 
-    />
-    <ImageButton
-            android:layout_width="323dp"
-            android:layout_height="107dp"
-            app:srcCompat="@drawable/know"
-
-            android:id="@+id/knowledgeBtn"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-
-            android:scaleType="centerCrop"
-
-            android:backgroundTint="#ffffff" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/historyBtn"
-            android:layout_marginTop="8dp"/>
-    <ImageButton
-
-            app:srcCompat="@drawable/history"
-            android:id="@+id/historyBtn"
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="320dp"
+            android:layout_height="720dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent">
 
 
-            android:layout_width="314dp"
-            android:layout_height="102dp"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-
-            android:scaleType="centerCrop"
-
-            android:backgroundTint="#ffffff"
-
-
-            app:layout_constraintTop_toBottomOf="@+id/testBtn"
-            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.482"/>
-    <ImageView
-            android:layout_width="388dp"
-            android:layout_height="166dp" app:srcCompat="@drawable/logo"
-            android:id="@+id/imageView3"
-            android:scaleType="centerInside"
-            android:layout_marginTop="60dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="1.0"/>
-    />
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="93dp"/>
+        <ImageView
+                android:layout_width="318dp"
+                android:layout_height="94dp" app:srcCompat="@drawable/logo" android:id="@+id/imageView"
+                android:layout_gravity="left"
+        />
+        <TextView
+                android:text="ยินดีต้อนรับเข้าสู่ MENTAL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textView"
+                android:fontFamily="@font/fontstyle"
+                android:layout_gravity="center"
+                android:textSize="40dp"
+                android:textColor="#fff"
+                android:gravity="center"
 
 
+        />
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="81dp"
+                android:layout_gravity="left"
+                android:text="แบบทดสอบ"
+                android:textSize="30dp"
+                android:fontFamily="@font/fontstyle"
+                android:drawableLeft="@drawable/t"
+                android:backgroundTint="#ED18191A" android:id="@+id/testBtn"
+                android:background="@drawable/btn_border"
+        />
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="81dp"
+                android:id="@+id/knowledgeBtn"
+                android:layout_gravity="left"
+                android:text="ความรู้"
+                android:textSize="30dp"
+                android:fontFamily="@font/fontstyle"
+                android:drawableLeft="@drawable/k1"
+                android:backgroundTint="#ED18191A"
+                android:background="@drawable/btn_border"
+        />
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="78dp"
+                android:id="@+id/historyBtn"
+                android:layout_gravity="left"
+                android:text="ประวัติ"
+                android:textSize="30dp"
+                android:fontFamily="@font/fontstyle"
+                android:drawableLeft="@drawable/h"
+                android:backgroundTint="#ED18191A"
+                android:background="@drawable/btn_border"
+        />
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -429,7 +429,7 @@ class TestTry : AppCompatActivity() {
 
 
 
-                        if (days < 7) {
+                        if (days < 14) {
                             val builder = AlertDialog.Builder(context)
 
 
@@ -437,7 +437,7 @@ class TestTry : AppCompatActivity() {
 
 
 
-                            builder.setPositiveButton("คกลง") { dialog, which ->
+                            builder.setPositiveButton(" ตกลง") { dialog, which ->
                                 // Do something when user press the positive button
 
                                 //  activity.finish();
