@@ -4,21 +4,19 @@
                                              android:layout_height="match_parent"
                                                 android:layout_margin="8dp">
 
-    <LinearLayout android:layout_width="wrap_content"
+    <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-
-                  android:layout_centerInParent="true"
-
-                  android:layout_margin="8dp"
                   android:orientation="vertical"
-
-    >
+                  android:layout_alignParentEnd="true"
+                  android:layout_marginTop="325dp"
+                  android:layout_marginStart="8dp" android:layout_marginEnd="193dp"
+                  android:layout_alignParentTop="true">
 
 
         <TextView
                 android:layout_margin="4dp"
                 android:id="@+id/result_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
                 android:background="#07000000"
@@ -28,7 +26,7 @@
         <TextView
                 android:layout_margin="4dp"
                 android:id="@+id/result_percent"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
                 android:background="#07000000"
