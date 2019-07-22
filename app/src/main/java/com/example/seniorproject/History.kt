@@ -19,20 +19,16 @@ class History : AppCompatActivity() {
     private var dataShow = ArrayList<String> ()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_history)
-
         listView = findViewById(R.id.history)
-
         populateDataList { show() }
 
     }
 
     fun populateDataList(callback: ()->Unit){
 
-        val dataReference = FirebaseDatabase.getInstance().getReference("Datas")
+        val dataReference = FirebaseDatabase.getInstance().getReference("Data4")
 
         dataReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -46,9 +42,7 @@ class History : AppCompatActivity() {
 
                     val scoreList   = item.child("Score")
 
-
                     val resultList  = item.child("Result").children
-
 
                     var tempList = ArrayList< Pair<String,Pair<Int,Int>>>()
 
@@ -74,28 +68,17 @@ class History : AppCompatActivity() {
 
                             tempList.add(resultScorePair)
 
-
                         }
-
-                     //   Log.d("result",result.toString())
                     }
 
                     dataList[disorder] = tempList
-
-
                 }
 
                 Log.d("DataList",dataList.toString())
-
-
                 callback()
-
             }
 
-
-
         })
-
 
     }
 
@@ -104,9 +87,7 @@ class History : AppCompatActivity() {
         val usrReference = FirebaseDatabase.getInstance().getReference("History")
             .child(MyAppApplication.globalUser.toString())
 
-
         usrReference.addListenerForSingleValueEvent(object : ValueEventListener {
-
             override fun onCancelled(p0: DatabaseError) {
             }
 
@@ -125,26 +106,16 @@ class History : AppCompatActivity() {
                        // Log.d("test",resultScoreList.toString())
 
                         for (resultScore in resultScoreList!!){
-
-
-
                            if ( resultScore.second.first <= p2.value.toString().toInt()
                                && resultScore.second.second >= p2.value.toString().toInt()){
-
-                                data = data + disorder + " : " +resultScore.first + " ,"
-
+                                data = data + "\n"+disorder + " : " +resultScore.first + " "
                                 break;
-
                             }
-
                         }
-
                     }
                     data = p1.child("lastTry").value.toString() + "  " + data
 
                     dataShow.add(data)
-
-
                 }
 
                 val adapter =
@@ -152,7 +123,6 @@ class History : AppCompatActivity() {
                     ArrayAdapter(applicationContext, android.R.layout.simple_list_item_1,dataShow)
 
                 listView.adapter = adapter;
-
 
             }
         })

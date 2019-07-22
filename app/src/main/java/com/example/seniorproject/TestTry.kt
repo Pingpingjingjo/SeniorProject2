@@ -12,7 +12,6 @@ import android.view.View
 import android.widget.RadioButton
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_test.*
-import java.util.*
 import kotlin.collections.MutableList
 import kotlin.collections.MutableMap
 import kotlin.collections.mutableListOf
@@ -21,8 +20,6 @@ import kotlin.collections.set
 import kotlin.collections.shuffle
 import com.google.firebase.database.DataSnapshot
 import java.time.*
-import com.google.firebase.storage.StorageException
-import android.support.annotation.NonNull
 import android.widget.TextView
 import kotlin.collections.ArrayList
 
@@ -37,8 +34,9 @@ class TestTry : AppCompatActivity() {
     //var scoreLists: MutableMap<String, MutableList<Int>> = mutableMapOf()
     var scores: MutableMap<String, Int> = mutableMapOf()
     var joined = ArrayList<QuesChoices>()
-    val Blue = Color.parseColor("#63ace5")
-    val White = Color.parseColor("#e7eff6");
+
+    val White = Color.parseColor("#e7f4fa")
+    val Blue = Color.parseColor("#a2d3eb");
 
     lateinit var context: Context
 
@@ -63,13 +61,13 @@ class TestTry : AppCompatActivity() {
 
         dataReference = FirebaseDatabase.getInstance().getReference("Data4")
 
-        radioButton1.visibility = View.INVISIBLE
+        Ctxt1.visibility = View.INVISIBLE
 
-        radioButton2.visibility = View.INVISIBLE
+        Ctxt2.visibility = View.INVISIBLE
 
-        radioButton3.visibility = View.INVISIBLE
+        Ctxt3.visibility = View.INVISIBLE
 
-        radioButton4.visibility = View.INVISIBLE
+        Ctxt4.visibility = View.INVISIBLE
 
         preBtn.visibility = View.INVISIBLE
 
@@ -165,28 +163,28 @@ class TestTry : AppCompatActivity() {
     fun addPoint(quesChoices: QuesChoices): Int {
 
         var score: Int = -1
-        if (radioButton1.isChecked()) {
+        if (Ctxt1.isChecked()) {
             score = quesChoices.points[0]
             scores[quesChoices.type] = scores[quesChoices.type]!! + quesChoices.points!![0].toInt()!!
             Ctxt1.setBackgroundColor(Blue)
             Ctxt2.setBackgroundColor(White)
             Ctxt3.setBackgroundColor(White)
             Ctxt4.setBackgroundColor(White)
-            radioButton2.setChecked(false)
-            radioButton3.setChecked(false)
-            radioButton4.setChecked(false)
+            Ctxt2.setChecked(false)
+            Ctxt3.setChecked(false)
+            Ctxt4.setChecked(false)
 
-        } else if (radioButton2.isChecked()) {
+        } else if (Ctxt2.isChecked()) {
             score = quesChoices.points[1]
             scores[quesChoices.type] = scores[quesChoices.type]!! + quesChoices.points!![1].toInt()!!
             Ctxt2.setBackgroundColor(Blue)
             Ctxt1.setBackgroundColor(White)
             Ctxt3.setBackgroundColor(White)
             Ctxt4.setBackgroundColor(White)
-            radioButton1.setChecked(false)
-            radioButton3.setChecked(false)
-            radioButton4.setChecked(false)
-        } else if (radioButton3.isChecked()) {
+            Ctxt1.setChecked(false)
+            Ctxt3.setChecked(false)
+            Ctxt4.setChecked(false)
+        } else if (Ctxt3.isChecked()) {
 
             score = quesChoices.points[2]
             scores[quesChoices.type] = scores[quesChoices.type]!! + quesChoices.points!![2].toInt()!!
@@ -194,11 +192,11 @@ class TestTry : AppCompatActivity() {
             Ctxt2.setBackgroundColor(White)
             Ctxt3.setBackgroundColor(Blue)
             Ctxt4.setBackgroundColor(White)
-            radioButton2.setChecked(false)
-            radioButton1.setChecked(false)
-            radioButton4.setChecked(false)
+            Ctxt2.setChecked(false)
+            Ctxt1.setChecked(false)
+            Ctxt4.setChecked(false)
 
-        } else if (radioButton4.isChecked()) {
+        } else if (Ctxt4.isChecked()) {
 
             score = quesChoices.points[3]
             scores[quesChoices.type] = scores[quesChoices.type]!! + quesChoices.points!![3].toInt()!!
@@ -206,9 +204,9 @@ class TestTry : AppCompatActivity() {
             Ctxt2.setBackgroundColor(White)
             Ctxt3.setBackgroundColor(White)
             Ctxt4.setBackgroundColor(Blue)
-            radioButton2.setChecked(false)
-            radioButton3.setChecked(false)
-            radioButton1.setChecked(false)
+            Ctxt2.setChecked(false)
+            Ctxt3.setChecked(false)
+            Ctxt1.setChecked(false)
         }
         return score
     }
@@ -219,10 +217,10 @@ class TestTry : AppCompatActivity() {
         Ctxt2.setBackgroundColor(White)
         Ctxt3.setBackgroundColor(White)
         Ctxt4.setBackgroundColor(White)
-        radioButton2.setChecked(false)
-        radioButton2.setChecked(false)
-        radioButton3.setChecked(false)
-        radioButton4.setChecked(false)
+        Ctxt2.setChecked(false)
+        Ctxt2.setChecked(false)
+        Ctxt3.setChecked(false)
+        Ctxt4.setChecked(false)
 
     }
 
@@ -244,44 +242,44 @@ class TestTry : AppCompatActivity() {
         radioButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 var checked = view as RadioButton
-                if (radioButton1 == checked) {
+                if (Ctxt1 == checked) {
 
                     Ctxt1.setBackgroundColor(Blue)
                     Ctxt2.setBackgroundColor(White)
                     Ctxt3.setBackgroundColor(White)
                     Ctxt4.setBackgroundColor(White)
-                    radioButton2.setChecked(false)
-                    radioButton3.setChecked(false)
-                    radioButton4.setChecked(false)
+                    Ctxt2.setChecked(false)
+                    Ctxt3.setChecked(false)
+                    Ctxt4.setChecked(false)
 
-                } else if (radioButton2 == checked) {
+                } else if (Ctxt2 == checked) {
 
                     Ctxt2.setBackgroundColor(Blue)
                     Ctxt1.setBackgroundColor(White)
                     Ctxt3.setBackgroundColor(White)
                     Ctxt4.setBackgroundColor(White)
-                    radioButton1.setChecked(false)
-                    radioButton3.setChecked(false)
-                    radioButton4.setChecked(false)
-                } else if (radioButton3 == checked) {
+                    Ctxt1.setChecked(false)
+                    Ctxt3.setChecked(false)
+                    Ctxt4.setChecked(false)
+                } else if (Ctxt3 == checked) {
 
                     Ctxt1.setBackgroundColor(White)
                     Ctxt2.setBackgroundColor(White)
                     Ctxt3.setBackgroundColor(Blue)
                     Ctxt4.setBackgroundColor(White)
-                    radioButton2.setChecked(false)
-                    radioButton1.setChecked(false)
-                    radioButton4.setChecked(false)
+                    Ctxt2.setChecked(false)
+                    Ctxt1.setChecked(false)
+                    Ctxt4.setChecked(false)
 
-                } else if (radioButton4 == checked) {
+                } else if (Ctxt4 == checked) {
 
                     Ctxt1.setBackgroundColor(White)
                     Ctxt2.setBackgroundColor(White)
                     Ctxt3.setBackgroundColor(White)
                     Ctxt4.setBackgroundColor(Blue)
-                    radioButton2.setChecked(false)
-                    radioButton3.setChecked(false)
-                    radioButton1.setChecked(false)
+                    Ctxt2.setChecked(false)
+                    Ctxt3.setChecked(false)
+                    Ctxt1.setChecked(false)
                 }
             }
         })
@@ -294,10 +292,10 @@ class TestTry : AppCompatActivity() {
         var i: Int = -1
         var firstTime: Boolean = true
 
-        setOnClickListener(radioButton1)
-        setOnClickListener(radioButton2)
-        setOnClickListener(radioButton3)
-        setOnClickListener(radioButton4)
+        setOnClickListener(Ctxt1)
+        setOnClickListener(Ctxt2)
+        setOnClickListener(Ctxt3)
+        setOnClickListener(Ctxt4)
 
 
 
@@ -312,10 +310,10 @@ class TestTry : AppCompatActivity() {
 
                 firstTime = false
 
-                radioButton1.visibility = View.VISIBLE
-                radioButton2.visibility = View.VISIBLE
-                radioButton3.visibility = View.VISIBLE
-                radioButton4.visibility = View.VISIBLE
+                Ctxt1.visibility = View.VISIBLE
+                Ctxt2.visibility = View.VISIBLE
+                Ctxt3.visibility = View.VISIBLE
+                Ctxt4.visibility = View.VISIBLE
 
                 nextBtn.text = "ถัดไป"
                 i++
@@ -429,14 +427,9 @@ class TestTry : AppCompatActivity() {
 
 
 
-                        if (days < 14) {
+                        if (days < 1) {
                             val builder = AlertDialog.Builder(context)
-
-
-                            builder.setMessage("กรุณา ทําแบบตรวจสอบ หลังจาก " + (14 - days) + "วัน")
-
-
-
+                            builder.setMessage("กรุณา ทําแบบตรวจสอบ หลังจาก " + (1 - days) + "วัน")
                             builder.setPositiveButton(" ตกลง") { dialog, which ->
                                 // Do something when user press the positive button
 

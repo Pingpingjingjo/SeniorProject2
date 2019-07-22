@@ -18,17 +18,14 @@ class ResultAdapter(private val context: Context,
 
         val rowView = convertView ?: inflater.inflate(R.layout.result_list_view, parent, false)
 
-        val value = (255*dataSource[position].value)
-
-        rowView.setBackgroundColor(Color.rgb(value,255-value,0))
-
         val textView = rowView.findViewById<TextView>(R.id.result_text)
 
         val textView2 = rowView.findViewById<TextView>(R.id.result_percent)
 
         textView2.text = dataSource[position].percent.toString()
-
         textView.text = dataSource[position].alias + " : " + dataSource[position].valueAlias
+        textView.setTextColor(Color.BLACK);
+        textView2.setTextColor(Color.RED)
 
         return rowView
     }
@@ -44,5 +41,6 @@ class ResultAdapter(private val context: Context,
     override fun getCount(): Int {
        return dataSource.size
     }
+
 
 }

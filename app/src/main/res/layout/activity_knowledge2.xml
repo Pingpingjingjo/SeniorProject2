@@ -6,60 +6,79 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".knowledge2" android:backgroundTint="#adcbe3">
+        tools:context=".knowledge2"
+        android:background="@drawable/colorbg"
+>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="337dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="97dp" app:srcCompat="@drawable/kk"
+                android:id="@+id/imageView2"
+        />
+        <TextView
+                android:text="ความรู้"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textView17"
+                android:fontFamily="@font/fontstyle"
+                android:backgroundTint="#ED030303"
+                android:textSize="30dp"
+                android:gravity="center"
 
-    <ScrollView
-            android:layout_width="367dp"
-            android:layout_height="565dp" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.666">
+        />
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/uppertext"
+                android:fontFamily="@font/fontstyle"
+                android:backgroundTint="#ED030303"
+                android:textSize="20dp"
+                android:gravity="center"
+
+        />
+        <VideoView
+                android:layout_width="match_parent"
+                android:layout_height="259dp" android:id="@+id/video" android:foregroundTint="#00661B1B"
+                android:background="@drawable/btn_border"
+        />
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+        <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_media_play"
+                android:id="@+id/play" android:layout_weight="1"
+                android:background="@drawable/btn_border"
+
+        />
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
         <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="343dp"
-                android:layout_height="708dp" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent">
-            <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageView11"/>
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_media_previous"
+                    android:id="@+id/prev" android:layout_weight="1"
+                    android:background="@drawable/button2"
 
-            <TextView
-                    android:text="โรคซึมเศร้า"
-                    android:layout_width="match_parent"
-                    android:layout_height="43dp"
-                    android:gravity="center"
-                    android:id="@+id/uppertext"
             />
-            <VideoView
-                    android:layout_width="match_parent"
-                    android:layout_height="252dp" android:id="@+id/video"
-                    android:gravity="center"
+            <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_media_next"
+                    android:id="@+id/next" android:layout_weight="1"
+                    android:background="@drawable/button2"
             />
-            <Button
-                    android:text="Play"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/play" android:backgroundTint="#a6d1e8"/>
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="63dp">
-                <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_media_previous"
-                        android:id="@+id/prev" android:layout_weight="1" android:backgroundTint="#4692bc"/>
-                <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_media_next"
-                        android:id="@+id/next" android:layout_weight="1" android:backgroundTint="#4692bc"/>
-            </LinearLayout>
-
-
         </LinearLayout>
-    </ScrollView>
-
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
