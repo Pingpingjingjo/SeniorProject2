@@ -23,17 +23,20 @@ import com.google.firebase.database.DataSnapshot
 import java.time.*
 import com.google.firebase.storage.StorageException
 import android.support.annotation.NonNull
+import android.widget.TextView
+import kotlin.collections.ArrayList
 
 
 class TestTry : AppCompatActivity() {
 
     lateinit var dataReference: DatabaseReference
     var disorderNameList: MutableList<String> = mutableListOf()
-    var questionLists: MutableMap<String, MutableList<TestRecord>> = mutableMapOf()
-    var choiceLists: MutableMap<String, MutableList<String>> = mutableMapOf()
-    var scoreLists: MutableMap<String, MutableList<Int>> = mutableMapOf()
+    var quesChoicesLists: MutableMap<String, MutableList<QuesChoices>> = mutableMapOf()
+    //var questionLists: MutableMap<String, MutableList<TestRecord>> = mutableMapOf()
+    //var choiceLists: MutableMap<String, MutableList<String>> = mutableMapOf()
+    //var scoreLists: MutableMap<String, MutableList<Int>> = mutableMapOf()
     var scores: MutableMap<String, Int> = mutableMapOf()
-    var joined = ArrayList<TestRecord>()
+    var joined = ArrayList<QuesChoices>()
     val Blue = Color.parseColor("#63ace5")
     val White = Color.parseColor("#e7eff6");
 
@@ -58,7 +61,7 @@ class TestTry : AppCompatActivity() {
     override fun onPostResume() {
         super.onPostResume()
 
-        dataReference = FirebaseDatabase.getInstance().getReference("Datas")
+        dataReference = FirebaseDatabase.getInstance().getReference("Data4")
 
         radioButton1.visibility = View.INVISIBLE
 
@@ -106,61 +109,34 @@ class TestTry : AppCompatActivity() {
 
         //------------ Question ----------------
 
-        var questionList: MutableList<TestRecord> = mutableListOf()
-        var questionReference: DatabaseReference =
-            FirebaseDatabase.getInstance().getReference("Datas/" + disorder + "/Question")
+        var quesChoicesList: MutableList<QuesChoices> = mutableListOf()
+        var quesChoicesReference: DatabaseReference =
+            FirebaseDatabase.getInstance().getReference("Data4/" + disorder + "/QuesChoices")
         //  Log.d("hello","Datas/" + disorder + "/Question")
-        questionReference.addListenerForSingleValueEvent(object : ValueEventListener {
+        quesChoicesReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
 
                 for (item in p0.children) {
-                    val c = item.getValue(String::class.java)
+                    val question: String = item.key!!
+                    var choiceRef: DataSnapshot = item.child("Choices")
+                    var choiceList: MutableList<String> = mutableListOf()
+                    for (choice in choiceRef.children) {
+                        choiceList.add(choice.getValue(String::class.java)!!)
+                    }
+                    var pointRef: DataSnapshot = item.child("Point")
+                    var pointList: MutableList<Int> = mutableListOf()
+                    for (point in pointRef.children) {
+                        pointList.add(point.getValue(Int::class.java)!!)
+                    }
                     //    Log.d("question", c)
-                    questionList.add(TestRecord(c!!, disorder))
+                    quesChoicesList.add(QuesChoices(disorder, question, choiceList, pointList))
                 }
             }
         })
-        questionLists[disorder] = questionList
-
-        //------------Choices ----------------
-        var choiceList: MutableList<String> = mutableListOf()
-        var choiceReference: DatabaseReference =
-            FirebaseDatabase.getInstance().getReference("Datas/" + disorder + "/Choices")
-        choiceReference.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-            }
-
-            override fun onDataChange(p0: DataSnapshot) {
-
-                for (item in p0.children) {
-                    val c = item.getValue(String::class.java)
-                    //   Log.d("choice", c)
-                    choiceList.add(c!!)
-                }
-            }
-        })
-        choiceLists[disorder] = choiceList
-        //-----------score-------------------
-        var scoreList: MutableList<Int> = mutableListOf()
-        var scoreReference: DatabaseReference =
-            FirebaseDatabase.getInstance().getReference("Datas/" + disorder + "/Point")
-        scoreReference.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-            }
-
-            override fun onDataChange(p0: DataSnapshot) {
-
-                for (item in p0.children) {
-                    val c = item.getValue(Int::class.java)
-                    // Log.d("score", c)
-                    scoreList.add(c!!)
-                }
-            }
-        })
-        scoreLists[disorder] = scoreList
+        quesChoicesLists[disorder] = quesChoicesList
 
 
     }
@@ -170,25 +146,28 @@ class TestTry : AppCompatActivity() {
     //------------------Choices & Button-------------------------
 
 
-    fun disorderFunction(disorder: String) {
+    fun disorderFunction(quesChoices: QuesChoices) {
         //Log.d("scoreList",scoreLists[disorder]!![0])
-        Ctxt1.setText(choiceLists[disorder]!![0])
-        Ctxt2.setText(choiceLists[disorder]!![1])
-        Ctxt3.setText(choiceLists[disorder]!![2])
-        Ctxt4.setText(choiceLists[disorder]!![3])
-
-
+        var choiceTexts = ArrayList<TextView>()
+        choiceTexts.add(Ctxt1)
+        choiceTexts.add(Ctxt2)
+        choiceTexts.add(Ctxt3)
+        choiceTexts.add(Ctxt4)
+        for (i in 0 until choiceTexts.size) {
+            if (i >= quesChoices.choices.size) {
+                choiceTexts[i].visibility = View.INVISIBLE
+            } else {
+                choiceTexts[i].setText(quesChoices.choices[i])
+            }
+        }
     }
 
-    fun addPoint(disorder: String): Int {
+    fun addPoint(quesChoices: QuesChoices): Int {
 
-
-        var score :Int = -1
-
+        var score: Int = -1
         if (radioButton1.isChecked()) {
-
-            score = scoreLists[disorder]!![0]
-            scores[disorder] = scores[disorder]!! + scoreLists[disorder]!![0].toInt()!!
+            score = quesChoices.points[0]
+            scores[quesChoices.type] = scores[quesChoices.type]!! + quesChoices.points!![0].toInt()!!
             Ctxt1.setBackgroundColor(Blue)
             Ctxt2.setBackgroundColor(White)
             Ctxt3.setBackgroundColor(White)
@@ -198,8 +177,8 @@ class TestTry : AppCompatActivity() {
             radioButton4.setChecked(false)
 
         } else if (radioButton2.isChecked()) {
-            score = scoreLists[disorder]!![1]
-            scores[disorder] = scores[disorder]!! + scoreLists[disorder]!![1].toInt()!!
+            score = quesChoices.points[1]
+            scores[quesChoices.type] = scores[quesChoices.type]!! + quesChoices.points!![1].toInt()!!
             Ctxt2.setBackgroundColor(Blue)
             Ctxt1.setBackgroundColor(White)
             Ctxt3.setBackgroundColor(White)
@@ -209,9 +188,8 @@ class TestTry : AppCompatActivity() {
             radioButton4.setChecked(false)
         } else if (radioButton3.isChecked()) {
 
-            score = scoreLists[disorder]!![2]
-
-            scores[disorder] = scores[disorder]!! + scoreLists[disorder]!![2].toInt()!!
+            score = quesChoices.points[2]
+            scores[quesChoices.type] = scores[quesChoices.type]!! + quesChoices.points!![2].toInt()!!
             Ctxt1.setBackgroundColor(White)
             Ctxt2.setBackgroundColor(White)
             Ctxt3.setBackgroundColor(Blue)
@@ -222,9 +200,8 @@ class TestTry : AppCompatActivity() {
 
         } else if (radioButton4.isChecked()) {
 
-            score = scoreLists[disorder]!![3
-            ]
-            scores[disorder] = scores[disorder]!! + scoreLists[disorder]!![3].toInt()!!
+            score = quesChoices.points[3]
+            scores[quesChoices.type] = scores[quesChoices.type]!! + quesChoices.points!![3].toInt()!!
             Ctxt1.setBackgroundColor(White)
             Ctxt2.setBackgroundColor(White)
             Ctxt3.setBackgroundColor(White)
@@ -233,9 +210,6 @@ class TestTry : AppCompatActivity() {
             radioButton3.setChecked(false)
             radioButton1.setChecked(false)
         }
-
-
-
         return score
     }
 
@@ -317,17 +291,12 @@ class TestTry : AppCompatActivity() {
     private fun init() {
 
         var savedScore = ArrayList<Int>()
-
         var i: Int = -1
-
         var firstTime: Boolean = true
 
         setOnClickListener(radioButton1)
-
         setOnClickListener(radioButton2)
-
         setOnClickListener(radioButton3)
-
         setOnClickListener(radioButton4)
 
 
@@ -335,10 +304,8 @@ class TestTry : AppCompatActivity() {
         nextBtn.setOnClickListener {
 
             if (firstTime) {
-
                 for (item in disorderNameList) {
-
-                    joined.addAll(questionLists[item]!!)
+                    joined.addAll(quesChoicesLists[item]!!)
                 }
 
                 joined.shuffle()
@@ -351,96 +318,62 @@ class TestTry : AppCompatActivity() {
                 radioButton4.visibility = View.VISIBLE
 
                 nextBtn.text = "ถัดไป"
+                i++
+                testTxt.setText(joined[i].question)
+                disorderFunction(joined[i])
+                Clear()
+                return@setOnClickListener
             }
-
-
-
-            i++
 
 
             when {
-                i == joined.size -> //i = joined.size -1
-
-                    testTxt.text = " สิ้นสุดการประเมิณ กดปุ่มถัดไปเพื่อดูผลการประเมิน"
-
-
                 i > joined.size -> {
-
-
                     PageChange()
                 }
                 i < joined.size -> {
-
-                    if (i > 0) {
-
-                        val point = addPoint(joined[i-1].type)
-
-                        if(point <0){
-                            i--
-
-                        }else{
-
-                            savedScore.add(addPoint(joined[i-1].type))
-                        }
-
-
+                    val point = addPoint(joined[i])
+                    if (point < 0) {
+                        i--
+                    } else {
+                        savedScore.add(point)
                     }
-
-
-                    testTxt.setText(joined[i].Question)
-
-                    disorderFunction(joined[i].type)
-
-                    Clear()
-
+                    i++
+                    if (i == joined.size) {
+                        testTxt.text = " สิ้นสุดการประเมิณ กดปุ่มถัดไปเพื่อดูผลการประเมิน"
+                        i++
+                    } else {
+                        testTxt.setText(joined[i].question)
+                        disorderFunction(joined[i])
+                        Clear()
+                    }
                 }
             }
 
-            if(i>0){
-
-
+            if (i > 0) {
                 preBtn.visibility = View.VISIBLE
-
-            }else{
-
+            } else {
                 preBtn.visibility = View.INVISIBLE
             }
-
-
         }//btn
 
 
         preBtn.setOnClickListener {
-
-
             i--
-
             if (i <= 0) {
-
                 i = 0
-
                 preBtn.visibility = View.INVISIBLE
-
-
             }
             if (i >= 0) {
-
                 Log.d("Current Index", i.toString())
-                scores[joined[i].type] = -savedScore[i]
-
+                scores[joined[i].type] = scores[joined[i].type]!! - savedScore[i].toInt()
                 savedScore.remove(i)
-
-                testTxt.setText(joined[i].Question)
-
-                disorderFunction(joined[i].type)
-
+                testTxt.setText(joined[i].question)
+                disorderFunction(joined[i])
                 Clear()
-
             }
 
         }//
     }
-
 
     private fun checkInterval() {
 
