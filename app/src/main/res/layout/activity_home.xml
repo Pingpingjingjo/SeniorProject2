@@ -11,15 +11,12 @@
 
     <LinearLayout
             android:orientation="vertical"
-            android:layout_width="320dp"
-            android:layout_height="720dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:layout_width="292dp"
+            android:layout_height="614dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent">
 
 
-        <Space
-                android:layout_width="match_parent"
-                android:layout_height="93dp"/>
         <ImageView
                 android:layout_width="318dp"
                 android:layout_height="94dp" app:srcCompat="@drawable/logo" android:id="@+id/imageView"
@@ -28,18 +25,18 @@
         <TextView
                 android:text="ยินดีต้อนรับเข้าสู่ MENTAL"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/textView"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
                 android:fontFamily="@font/fontstyle"
-                android:layout_gravity="center"
                 android:textSize="40dp"
-                android:textColor="#fff"
+                android:textColor="#252424"
                 android:gravity="center"
 
 
         />
         <Space
                 android:layout_width="match_parent"
-                android:layout_height="30dp"/>
+                android:layout_height="64dp"/>
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="81dp"
@@ -48,8 +45,10 @@
                 android:textSize="30dp"
                 android:fontFamily="@font/fontstyle"
                 android:drawableLeft="@drawable/t"
-                android:backgroundTint="#ED18191A" android:id="@+id/testBtn"
+                android:backgroundTint="#ED18191A"
+                android:id="@+id/testBtn"
                 android:background="@drawable/btn_border"
+                android:paddingLeft="40dp"
         />
         <Space
                 android:layout_width="match_parent"
@@ -65,6 +64,8 @@
                 android:drawableLeft="@drawable/k1"
                 android:backgroundTint="#ED18191A"
                 android:background="@drawable/btn_border"
+                android:paddingLeft="40dp"
+
         />
         <Space
                 android:layout_width="match_parent"
@@ -80,6 +81,9 @@
                 android:drawableLeft="@drawable/h"
                 android:backgroundTint="#ED18191A"
                 android:background="@drawable/btn_border"
+                android:paddingLeft="40dp"
+
+
         />
 
     </LinearLayout>

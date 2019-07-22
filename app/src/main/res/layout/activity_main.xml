@@ -124,7 +124,7 @@
             android:gravity="center"
             android:background="@drawable/btn_border"
 
-            android:textColor="#23292C"
+            android:textColor="#000"
             android:fontFamily="@font/fontstyle"
             android:textSize="30dp"
             android:textStyle="normal"

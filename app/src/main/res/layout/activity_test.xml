@@ -6,55 +6,79 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TestTry"
-        android:background="#ffffff"
 
 
 >
 
     <LinearLayout
             android:orientation="vertical"
-            android:layout_width="379dp"
-            android:layout_height="543dp" android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias="0.666" app:layout_constraintVertical_bias="0.034"
-            android:id="@+id/linearLayout2">
-        <ImageView
+            android:id="@+id/linearLayout2"
+
+    >
+        <TextView
+                android:text="แบบทดสอบ"
                 android:layout_width="match_parent"
-                android:layout_height="102dp" app:srcCompat="@drawable/testh"
-                android:id="@+id/imageView4"/>
+                android:layout_height="65dp"
+                android:id="@+id/textView3"
+                android:gravity="center"
+                android:textSize="30dp"
+                android:textColor="#1F2122"
+                android:fontFamily="@font/fontstyle"
+                android:textStyle="normal|bold"
+                android:background="@drawable/bg2"
+
+
+        />
         <TextView
                 android:layout_width="match_parent"
-                android:layout_height="165dp" android:id="@+id/testTxt"
-                android:textSize="20sp"
+                android:layout_height="wrap_content" android:id="@+id/testTxt"
                 android:text="คำแนะนำ: ตอบคำถามแบบทดสอบจากความเป็นจริงเพื่อความถูกต้องแม่นยำในการประเมิณ 	ระยะเวลาการประเมิณคือ 2 สัปดาห์ที่ผ่านมา หากพร้อมแล้วให้กดปุ่มถัดไป"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:textColor="#000000"
+                android:fontFamily="@font/fontstyle"
+                android:textSize="30dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="3dp"
+
 
         />
 
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="26dp"/>
         <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="298dp"
-                android:layout_weight="1" android:id="@+id/radio_group">
+                android:layout_weight="1" android:id="@+id/radio_group"
+                android:background="@drawable/bg2"
+                android:gravity="right"
+
+        >
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:layout_weight="1">
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:background="@drawable/choices"
+            >
                 <RadioButton
                         android:layout_width="46dp"
-                        android:layout_height="44dp"
+                        android:layout_height="match_parent"
                         android:id="@+id/radioButton1"
                         android:layout_weight="1"
-                        android:gravity="center"
 
                 />
                 <TextView
                         android:id="@+id/Ctxt1"
                         android:layout_width="330dp"
-                        android:layout_height="47dp"
+                        android:layout_height="match_parent"
                         android:gravity="center"
                         android:layout_gravity="right"
                         android:textColor="#000000"
@@ -65,10 +89,12 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:layout_weight="1">
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:background="@drawable/choices"
+            >
                 <RadioButton
                         android:layout_width="44dp"
-                        android:layout_height="44dp"
+                        android:layout_height="match_parent"
                         android:id="@+id/radioButton2"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -77,7 +103,7 @@
                 <TextView
                         android:id="@+id/Ctxt2"
                         android:layout_width="330dp"
-                        android:layout_height="47dp"
+                        android:layout_height="match_parent"
                         android:gravity="center"
                         android:layout_gravity="right"
                         android:textColor="#000000"
@@ -87,10 +113,12 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:layout_weight="1">
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:background="@drawable/choices"
+            >
                 <RadioButton
                         android:layout_width="42dp"
-                        android:layout_height="43dp"
+                        android:layout_height="match_parent"
                         android:id="@+id/radioButton3"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -99,7 +127,7 @@
                 <TextView
                         android:id="@+id/Ctxt3"
                         android:layout_width="330dp"
-                        android:layout_height="47dp"
+                        android:layout_height="match_parent"
                         android:gravity="center"
                         android:layout_gravity="right"
                         android:textColor="#000000"
@@ -109,10 +137,12 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="274dp" android:layout_weight="1">
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:background="@drawable/choices"
+            >
                 <RadioButton
                         android:layout_width="42dp"
-                        android:layout_height="43dp"
+                        android:layout_height="match_parent"
                         android:id="@+id/radioButton4"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -121,7 +151,7 @@
                 <TextView
                         android:id="@+id/Ctxt4"
                         android:layout_width="330dp"
-                        android:layout_height="47dp"
+                        android:layout_height="match_parent"
                         android:gravity="center"
                         android:layout_gravity="right"
                         android:textColor="#000000"
@@ -129,35 +159,39 @@
                 />
             </LinearLayout>
         </RadioGroup>
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="26dp" android:layout_weight="1"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <Button
+                    android:text="ต่อไป"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nextBtn"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_border"
+                    android:textSize="22dp"
+                    android:textColor="#1A1818"
+
+            />
+            <Button
+                    android:text="กลับไป"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/preBtn" android:layout_weight="1"
+                    android:background="@drawable/btn_border"
+                    android:textSize="22dp"
+                    android:textColor="#141313"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/nextBtn"
+                    android:layout_marginStart="8dp"
+            />
+        </LinearLayout>
 
 
     </LinearLayout>
-    <Button
-            android:text="กลับไป"
-            android:layout_width="170dp"
-            android:layout_height="45dp" android:id="@+id/preBtn" android:layout_weight="1"
-            android:background="@drawable/btn_border"
-            android:textSize="22dp"
-            android:textColor="#ffffff"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/nextBtn" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="48dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.511"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-            app:layout_constraintVertical_bias="0.684"/>
-    <Button
-            android:text="ต่อไป"
-            android:layout_width="170dp"
-            android:layout_height="46dp"
-            android:id="@+id/nextBtn"
-            android:layout_weight="1"
-            android:background="@drawable/btn_border"
-            android:textSize="22dp"
-            android:textColor="#ffffff"
 
-            android:layout_marginEnd="28dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="48dp"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" app:layout_constraintVertical_bias="0.833"/>
 
 </android.support.constraint.ConstraintLayout>
