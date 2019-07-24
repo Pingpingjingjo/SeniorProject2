@@ -1,11 +1,13 @@
 package com.example.seniorproject
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ListView
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_result.*
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.format.DateTimeFormatter
@@ -23,14 +25,19 @@ class Result : AppCompatActivity() {
 
     lateinit var context : Context
 
-
-////
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
-        context = this
 
+        infoBtn.setOnClickListener {
+            val intent1 = Intent(this, Info::class.java);
+            startActivity(intent1)
+
+        }
+
+
+        context = this
         listView = findViewById(R.id.results)
 
         dataReference = FirebaseDatabase.getInstance().getReference("Data4")
@@ -42,9 +49,7 @@ class Result : AppCompatActivity() {
             override fun onDataChange(p0: DataSnapshot) {
                 for (item in p0.children) {
                     val c = item.getKey()
-
                     disorderNameList.add(c!!)
-
                 }
 
                 val bundle = intent.extras
@@ -56,7 +61,12 @@ class Result : AppCompatActivity() {
                     }
                 }
 
-                Log.d("Score",scores.toString())
+//                for ( disorder in disorderNameList) {
+//                    Log.d("Score", scores[disorder].toString())
+////                    scores[disorder].rangeList.max
+//
+//                }
+
 
                 populateRangeList { populateResultList { populateOutput() } }
             }
@@ -78,25 +88,6 @@ class Result : AppCompatActivity() {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-
-
-                /*
-                    History{
-
-                        userName : {
-
-                            lastTry1:  disordersScore : {
-                                {disorder1:score1}, {disorder2:score2},{ disorderN:scoreN}
-                            } ,
-                            lastTry2:  disordersScore : {
-                                {disorder1:score1}, {disorder2:score2},{ disorderN:scoreN}
-                            } ,
-
-
-                        }
-                    }
-                 */
-
 
                 val userMap = HashMap<String,Any>()
 
@@ -138,8 +129,7 @@ class Result : AppCompatActivity() {
                     for (i in 0 until rangeList2!!.size) {
                         if (i == 0 && score < rangeList2[0].min) {
 
-                            val resultData = ResultData(
-                                disorder,
+                            val resultData = ResultData(disorder,
                                 score,
                                 resultList2!![resultList2.size - 1],
                                 0.00
@@ -179,8 +169,6 @@ class Result : AppCompatActivity() {
                 }
 
             })
-
-
 
         }
     }
@@ -254,5 +242,6 @@ class Result : AppCompatActivity() {
            })
        }
     }
+
 
 }// finish program

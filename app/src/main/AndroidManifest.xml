@@ -11,6 +11,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".Info">
+        </activity>
         <activity android:name=".knowledge2">
         </activity>
         <activity android:name=".knowledge1">

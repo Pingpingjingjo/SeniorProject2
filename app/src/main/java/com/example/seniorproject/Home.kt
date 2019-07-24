@@ -25,7 +25,7 @@ class Home : AppCompatActivity() {
 
         }
         historyBtn.setOnClickListener {
-            val intent3 = Intent(this, History::class.java);
+            val intent3 = Intent(this, Info::class.java);
             startActivity(intent3)
 
         }

@@ -1,16 +1,25 @@
 package com.example.seniorproject
 
+import android.content.Context
+import android.graphics.Color
+import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.TextView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class History : AppCompatActivity() {
+
+    lateinit var context : Context
+
 
     private lateinit var listView : ListView
 
@@ -21,8 +30,11 @@ class History : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
-        listView = findViewById(R.id.history)
+        listView = this.findViewById(R.id.history)
         populateDataList { show() }
+
+        context = this
+
 
     }
 
@@ -97,6 +109,7 @@ class History : AppCompatActivity() {
 
                     var data  =""
 
+                    dataShow.add(p1.child("lastTry").value.toString())
                     for (p2 in p1.child("disorderScores").children){
 
                         val disorder = p2.key.toString()
@@ -108,25 +121,34 @@ class History : AppCompatActivity() {
                         for (resultScore in resultScoreList!!){
                            if ( resultScore.second.first <= p2.value.toString().toInt()
                                && resultScore.second.second >= p2.value.toString().toInt()){
-                                data = data + "\n"+disorder + " : " +resultScore.first + " "
-                                break;
+//                                dataShow.add(disorder + "\n" +resultScore.first + " ")
+                                    dataShow.add(disorder + "  ::")
+                                    dataShow.add(resultScore.first)
+
+                               break;
                             }
                         }
-                    }
-                    data = p1.child("lastTry").value.toString() + "  " + data
 
-                    dataShow.add(data)
+                    }
+                    dataShow.add("___________________________________________")
+
+
                 }
 
-                val adapter =
 
-                    ArrayAdapter(applicationContext, android.R.layout.simple_list_item_1,dataShow)
-
+                val adapter = ArrayAdapter(applicationContext, R.layout.history_list_view,dataShow)
                 listView.adapter = adapter;
 
+
+
             }
+
+
+
         })
 
+
     }
+
 
 }

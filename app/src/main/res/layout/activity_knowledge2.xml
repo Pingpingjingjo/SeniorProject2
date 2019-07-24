@@ -47,7 +47,6 @@
         <VideoView
                 android:layout_width="match_parent"
                 android:layout_height="259dp" android:id="@+id/video" android:foregroundTint="#00661B1B"
-                android:background="@drawable/btn_border"
         />
         <Space
                 android:layout_width="match_parent"
