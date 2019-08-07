@@ -132,7 +132,8 @@ class Result : AppCompatActivity() {
                             val resultData = ResultData(disorder,
                                 score,
                                 resultList2!![resultList2.size - 1],
-                                0.00
+                                score.toString()+"/"+rangeList2[rangeList2.size-1].max.toString(),
+                                score*1.0/rangeList2[rangeList2.size-1].max*100
                             );
                             // calculate percent here
                             outputList.add(resultData);
@@ -143,7 +144,8 @@ class Result : AppCompatActivity() {
                                 disorder,
                                 score,
                                 resultList2!![i],
-                                0.00
+                                score.toString()+"/"+rangeList2[rangeList2.size-1].max.toString(),
+                                score*1.0/rangeList2[rangeList2.size-1].max*100
                             )
                             outputList.add(resultData)
 

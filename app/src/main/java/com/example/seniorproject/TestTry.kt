@@ -243,6 +243,7 @@ class TestTry : AppCompatActivity() {
             override fun onClick(view: View) {
                 var checked = view as RadioButton
                 if (Ctxt1 == checked) {
+                    Ctxt1.setChecked(true)
 
                     Ctxt1.setBackgroundColor(Blue)
                     Ctxt2.setBackgroundColor(White)
@@ -253,6 +254,7 @@ class TestTry : AppCompatActivity() {
                     Ctxt4.setChecked(false)
 
                 } else if (Ctxt2 == checked) {
+                    Ctxt2.setChecked(true)
 
                     Ctxt2.setBackgroundColor(Blue)
                     Ctxt1.setBackgroundColor(White)
@@ -262,6 +264,7 @@ class TestTry : AppCompatActivity() {
                     Ctxt3.setChecked(false)
                     Ctxt4.setChecked(false)
                 } else if (Ctxt3 == checked) {
+                    Ctxt3.setChecked(true)
 
                     Ctxt1.setBackgroundColor(White)
                     Ctxt2.setBackgroundColor(White)
@@ -272,6 +275,7 @@ class TestTry : AppCompatActivity() {
                     Ctxt4.setChecked(false)
 
                 } else if (Ctxt4 == checked) {
+                    Ctxt4.setChecked(true)
 
                     Ctxt1.setBackgroundColor(White)
                     Ctxt2.setBackgroundColor(White)
