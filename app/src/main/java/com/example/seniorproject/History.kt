@@ -110,7 +110,19 @@ class History : AppCompatActivity() {
                     var data  =""
 
                     dataShow.add(p1.child("lastTry").value.toString())
+
+                    var percents: MutableMap<String, String> = mutableMapOf()
+
+
                     for (p2 in p1.child("disorderScores").children){
+                        Log.d("lol","here")
+                        for (p2 in p1.child("percents").children) {
+                            Log.d("lol","hello")
+                            val disorder = p2.key.toString()
+                            val percent = p2.value.toString()
+                            percents[disorder]=percent
+                            Log.d("lol",disorder + percent)
+                        }
 
                         val disorder = p2.key.toString()
 
@@ -124,7 +136,7 @@ class History : AppCompatActivity() {
 //                                dataShow.add(disorder + "\n" +resultScore.first + " ")
                                     dataShow.add(disorder + "  ::")
                                     dataShow.add(resultScore.first)
-
+                               dataShow.add(percents[disorder]!!)
                                break;
                             }
                         }

@@ -3,7 +3,6 @@
           android:id="@+id/tv"
           android:padding="5sp"
           android:layout_width="match_parent"
-          android:singleLine="true"
           android:gravity="left"
           android:layout_height="wrap_content"
           android:textColor="#000"

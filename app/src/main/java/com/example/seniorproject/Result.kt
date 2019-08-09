@@ -19,6 +19,7 @@ class Result : AppCompatActivity() {
     lateinit var dataReference: DatabaseReference
     var disorderNameList: MutableList<String> = mutableListOf()
     var scores: MutableMap<String, Int> = mutableMapOf()
+    var percents: MutableMap<String, String> = mutableMapOf()
     var rangeLists: MutableMap<String, MutableList<Range>> = mutableMapOf()
     var resultLists: MutableMap<String, MutableList<String>> = mutableMapOf()
     private lateinit var listView : ListView
@@ -97,6 +98,8 @@ class Result : AppCompatActivity() {
 
                 userMap["disorderScores"] = scores
 
+                userMap["percents"] = percents
+
                 addingReference.push().setValue(userMap)
 
             }
@@ -135,6 +138,7 @@ class Result : AppCompatActivity() {
                                 score.toString()+"/"+rangeList2[rangeList2.size-1].max.toString(),
                                 score*1.0/rangeList2[rangeList2.size-1].max*100
                             );
+                            percents[disorder] = resultData.percent
                             // calculate percent here
                             outputList.add(resultData);
                         } else if (score >= rangeList2[i].min && score <= rangeList2[i].max) {
@@ -147,6 +151,7 @@ class Result : AppCompatActivity() {
                                 score.toString()+"/"+rangeList2[rangeList2.size-1].max.toString(),
                                 score*1.0/rangeList2[rangeList2.size-1].max*100
                             )
+                            percents[disorder] = resultData.percent
                             outputList.add(resultData)
 
 
