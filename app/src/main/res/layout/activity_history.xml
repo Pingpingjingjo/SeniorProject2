@@ -44,8 +44,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/history"
                 android:fontFamily="@font/fontstyle"
-                android:backgroundTint="#ED030303"
-                android:textSize="30dp"
+                android:textSize="40dp"
                 android:divider="@null"
 
         />

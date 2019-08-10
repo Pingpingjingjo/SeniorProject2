@@ -1,6 +1,7 @@
 package com.example.seniorproject
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
@@ -15,6 +16,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_history.*
 
 class History : AppCompatActivity() {
 
@@ -34,6 +36,11 @@ class History : AppCompatActivity() {
         populateDataList { show() }
 
         context = this
+
+        textView18.setOnClickListener {
+            val intent1 = Intent(this, Info::class.java)
+            startActivity(intent1)
+        }
 
 
     }
@@ -117,7 +124,6 @@ class History : AppCompatActivity() {
                     for (p2 in p1.child("disorderScores").children){
                         Log.d("lol","here")
                         for (p2 in p1.child("percents").children) {
-                            Log.d("lol","hello")
                             val disorder = p2.key.toString()
                             val percent = p2.value.toString()
                             percents[disorder]=percent
@@ -133,25 +139,20 @@ class History : AppCompatActivity() {
                         for (resultScore in resultScoreList!!){
                            if ( resultScore.second.first <= p2.value.toString().toInt()
                                && resultScore.second.second >= p2.value.toString().toInt()){
-//                                dataShow.add(disorder + "\n" +resultScore.first + " ")
-                                    dataShow.add(disorder + "  ::")
-                                    dataShow.add(resultScore.first)
-                               dataShow.add(percents[disorder]!!)
+                                    dataShow.add(disorder + " :: \t" + resultScore.first)
+//                                    dataShow.add(resultScore.first)
+                                    dataShow.add("คะแนน :: \t\t"+percents[disorder]!!)
                                break;
                             }
                         }
 
                     }
-                    dataShow.add("___________________________")
-
+                    dataShow.add("____________________________________")
 
                 }
 
-
                 val adapter = ArrayAdapter(applicationContext, R.layout.history_list_view,dataShow)
                 listView.adapter = adapter;
-
-
 
             }
 
