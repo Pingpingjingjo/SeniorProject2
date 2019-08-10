@@ -155,6 +155,7 @@ class TestTry : AppCompatActivity() {
             if (i >= quesChoices.choices.size) {
                 choiceTexts[i].visibility = View.INVISIBLE
             } else {
+                choiceTexts[i].visibility = View.VISIBLE
                 choiceTexts[i].setText(quesChoices.choices[i])
             }
         }
@@ -221,6 +222,7 @@ class TestTry : AppCompatActivity() {
         Ctxt2.setChecked(false)
         Ctxt3.setChecked(false)
         Ctxt4.setChecked(false)
+        radiogroup.clearCheck()
 
     }
 
