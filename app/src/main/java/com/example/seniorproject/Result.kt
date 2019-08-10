@@ -61,14 +61,6 @@ class Result : AppCompatActivity() {
 
                     }
                 }
-
-//                for ( disorder in disorderNameList) {
-//                    Log.d("Score", scores[disorder].toString())
-////                    scores[disorder].rangeList.max
-//
-//                }
-
-
                 populateRangeList { populateResultList { populateOutput() } }
             }
         })
@@ -87,25 +79,16 @@ class Result : AppCompatActivity() {
             override fun onCancelled(p0: DatabaseError) {
 
             }
-
             override fun onDataChange(p0: DataSnapshot) {
 
                 val userMap = HashMap<String,Any>()
-
                 val lastTry = DateTimeFormatter.ISO_INSTANT.format(Instant.now())
-
                 userMap["lastTry"] = lastTry;
-
                 userMap["disorderScores"] = scores
-
                 userMap["percents"] = percents
-
                 addingReference.push().setValue(userMap)
-
             }
-
         })
-
 
     }
     private fun populateOutput(){
@@ -161,22 +144,14 @@ class Result : AppCompatActivity() {
 
                     count--
 
-
                     if(count ==0){
-
                         Log.d("Data",outputList.toString())
-
                         val adapter = ResultAdapter(context, outputList)
-
                         listView.adapter = adapter
-
                         saveData()
                     }
-
                 }
-
             })
-
         }
     }
 
@@ -203,9 +178,7 @@ class Result : AppCompatActivity() {
                     }
 
                     resultLists[disorder] = tempResultList
-
                     count--
-
                     if(count==0){
 
                         callback()
@@ -227,22 +200,15 @@ class Result : AppCompatActivity() {
            rangeReference.addListenerForSingleValueEvent(object : ValueEventListener {
                override fun onCancelled(p0: DatabaseError) {
                }
-
                override fun onDataChange(p0: DataSnapshot) {
-
                    for (item in p0.children) {
                        var c = item.getValue(Range::class.java)
 
                        tempRangList.add(c!!)
                    }
-
                    rangeLists[disorder] = tempRangList
-
                    count--
-
                    if(count ==0 ){
-
-
                        callback()
                    }
                }

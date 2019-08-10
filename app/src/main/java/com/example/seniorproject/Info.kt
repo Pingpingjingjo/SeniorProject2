@@ -53,7 +53,7 @@ class Info : AppCompatActivity() {
                 var dataShow = ArrayList<String> ()
                 for (disorder in disorderNameList){
                     dataShow.add(disorder)
-                    dataShow.add("Total Score \t Result")
+                    dataShow.add("Total Score \t\t\t Result")
                     dataShow.add( "0-" + (rangeLists[disorder]!![0].min-1).toString()+"\t" +resultLists[disorder]!![0])
                     for (i in 1 until resultLists[disorder]!!.size){
                         dataShow.add(rangeLists[disorder]!![i-1].min.toString() + "-" + rangeLists[disorder]!![i-1].max.toString()+"\t" +resultLists[disorder]!![i])

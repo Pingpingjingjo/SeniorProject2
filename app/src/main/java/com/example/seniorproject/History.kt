@@ -142,7 +142,7 @@ class History : AppCompatActivity() {
                         }
 
                     }
-                    dataShow.add("___________________________________________")
+                    dataShow.add("___________________________")
 
 
                 }

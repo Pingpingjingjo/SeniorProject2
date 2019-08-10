@@ -7,7 +7,6 @@ import android.content.Intent
 import android.util.Log
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.math.BigInteger
 import java.security.MessageDigest
 

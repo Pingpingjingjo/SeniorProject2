@@ -7,13 +7,13 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_sign_up.*
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.util.concurrent.CountDownLatch
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.FirebaseError
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.trysignup.*
 import java.math.BigInteger
 import java.security.MessageDigest
 
