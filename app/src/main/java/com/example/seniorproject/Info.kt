@@ -53,15 +53,19 @@ class Info : AppCompatActivity() {
                 var dataShow = ArrayList<String> ()
                 for (disorder in disorderNameList){
                     dataShow.add(disorder)
-                    dataShow.add(java.lang.String.format("%-25s%10s","Total Score","Result"))
-                    dataShow.add( java.lang.String.format("%-25s%10s",("0-"+(rangeLists[disorder]!![0].min-1)).toString(), resultLists[disorder]!![0]))
+//                    dataShow.add(java.lang.String.format("%-6s%1s"," Score","Result"))
+                    dataShow.add( java.lang.String.format("%-10s%10s",("0-"+(rangeLists[disorder]!![0].min-1)).toString(), resultLists[disorder]!![0]))
                     for (i in 1 until resultLists[disorder]!!.size){
-                        dataShow.add( java.lang.String.format( "%-25s%10s",rangeLists[disorder]!![i-1].min.toString()+"-"+rangeLists[disorder]!![i-1].max.toString(),resultLists[disorder]!![i]))
+                        dataShow.add( java.lang.String.format( "%-10s%10s",rangeLists[disorder]!![i-1].min.toString()+"-"+rangeLists[disorder]!![i-1].max.toString(),resultLists[disorder]!![i]))
                     }
+                    dataShow.add("  ______________________________________________")
+
                 }
 
-                val adapter = ArrayAdapter(applicationContext, android.R.layout.simple_list_item_1,dataShow)
+                val adapter = ArrayAdapter(applicationContext, R.layout.info_list_view,dataShow)
                 infoListView.adapter = adapter;
+
+
             }
         })
 

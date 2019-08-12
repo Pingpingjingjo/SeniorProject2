@@ -21,20 +21,16 @@ import kotlinx.android.synthetic.main.activity_history.*
 class History : AppCompatActivity() {
 
     lateinit var context : Context
-
-
     private lateinit var listView : ListView
-
     private var dataList  = HashMap<String, List< Pair<String, Pair<Int,Int> > >> ()
-
     private var dataShow = ArrayList<String> ()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
+
         listView = this.findViewById(R.id.history)
         populateDataList { show() }
-
         context = this
 
         textView18.setOnClickListener {
@@ -147,17 +143,12 @@ class History : AppCompatActivity() {
                         }
 
                     }
-                    dataShow.add("____________________________________")
-
+                    dataShow.add("_______________________________")
                 }
-
                 val adapter = ArrayAdapter(applicationContext, R.layout.history_list_view,dataShow)
                 listView.adapter = adapter;
 
             }
-
-
-
         })
 
 

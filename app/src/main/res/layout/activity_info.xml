@@ -5,27 +5,38 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Info">
+        tools:context=".Info"
+        android:background="@drawable/colorbg"
+>
 
     <LinearLayout
             android:orientation="vertical"
-            android:layout_width="322dp"
-            android:layout_height="700dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="388dp"
+            android:layout_height="662dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent">
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="30dp" app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/fontstyle"
+            android:backgroundTint="#ED030303"
+            android:textSize="30dp">
+
         <TextView
                 android:text="ข้อมูลการประเมิน"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView"
                 android:fontFamily="@font/fontstyle"
-                android:backgroundTint="#ED030303"
                 android:textSize="30dp"
                 android:gravity="center"
+                android:background="@drawable/customborder"
 
         />
         <ListView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/infoListView"/>
+                android:layout_height="609dp"
+                android:id="@+id/infoListView"
+                android:divider="@null"
+                android:fontFamily="@font/fontstyle"
+        />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
