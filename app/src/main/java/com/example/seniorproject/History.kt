@@ -33,7 +33,7 @@ class History : AppCompatActivity() {
         populateDataList { show() }
         context = this
 
-        textView18.setOnClickListener {
+        imageButton2.setOnClickListener {
             val intent1 = Intent(this, Info::class.java)
             startActivity(intent1)
         }

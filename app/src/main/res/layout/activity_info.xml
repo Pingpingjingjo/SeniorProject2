@@ -23,20 +23,27 @@
         <TextView
                 android:text="ข้อมูลการประเมิน"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:id="@+id/textView"
                 android:fontFamily="@font/fontstyle"
                 android:textSize="30dp"
                 android:gravity="center"
                 android:background="@drawable/customborder"
+                android:textColor="#000"
+
 
         />
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="13dp"/>
         <ListView
                 android:layout_width="match_parent"
-                android:layout_height="609dp"
+                android:layout_height="603dp"
                 android:id="@+id/infoListView"
                 android:divider="@null"
                 android:fontFamily="@font/fontstyle"
+                android:textColor="#000"
+
         />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

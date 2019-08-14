@@ -58,7 +58,7 @@ class Info : AppCompatActivity() {
                     for (i in 1 until resultLists[disorder]!!.size){
                         dataShow.add( java.lang.String.format( "%-10s%10s",rangeLists[disorder]!![i-1].min.toString()+"-"+rangeLists[disorder]!![i-1].max.toString(),resultLists[disorder]!![i]))
                     }
-                    dataShow.add("  ______________________________________________")
+                    dataShow.add("_______________________________________")
 
                 }
 
@@ -70,7 +70,4 @@ class Info : AppCompatActivity() {
         })
 
     }
-
-
-
 }

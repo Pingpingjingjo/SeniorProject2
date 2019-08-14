@@ -25,17 +25,35 @@
 
     >
 
-        <TextView
-                android:text="ประวัติ"
-                android:gravity="left|center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/textView18"
-                android:drawableLeft="@drawable/hh"
-                android:fontFamily="@font/fontstyle"
-                android:backgroundTint="#ED030303"
-                android:textSize="30dp"
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="325dp"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:text="ประวัติ"
+                    android:gravity="left|center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView18"
+                    android:drawableLeft="@drawable/hh"
+                    android:fontFamily="@font/fontstyle"
+                    android:textSize="30dp"
+                    android:textColor="#333232"
 
-        />
+
+            />
+            <Space
+                    android:layout_width="113dp"
+                    android:layout_height="match_parent" android:layout_weight="1"/>
+            <ImageButton
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/info1"
+                    android:id="@+id/imageButton2"
+                    android:layout_weight="1"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="#AED0E9"/>
+        </LinearLayout>
         <Space
                 android:layout_width="334dp"
                 android:layout_height="17dp"/>
@@ -44,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/history"
                 android:divider="@null"
-
+                android:textColor="#333232"
         />
 
     </LinearLayout>

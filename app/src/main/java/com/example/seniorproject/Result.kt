@@ -150,6 +150,7 @@ class Result : AppCompatActivity() {
                         listView.adapter = adapter
                         saveData()
                     }
+
                 }
             })
         }
