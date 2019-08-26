@@ -343,7 +343,7 @@ class TestTry : AppCompatActivity() {
                     }
                     i++
                     if (i == joined.size) {
-                        testTxt.text = " สิ้นสุดการประเมิณ กดปุ่มถัดไปเพื่อดูผลการประเมิน"
+                        testTxt.text = " สิ้นสุดการประเมิน กดปุ่มถัดไปเพื่อดูผลการประเมิน"
                         i++
                     } else {
                         testTxt.setText(joined[i].question)

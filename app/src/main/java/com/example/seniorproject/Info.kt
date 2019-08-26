@@ -54,9 +54,9 @@ class Info : AppCompatActivity() {
                 for (disorder in disorderNameList){
                     dataShow.add(disorder)
 //                    dataShow.add(java.lang.String.format("%-6s%1s"," Score","Result"))
-                    dataShow.add( java.lang.String.format("%-10s%10s",("0-"+(rangeLists[disorder]!![0].min-1)).toString(), resultLists[disorder]!![0]))
-                    for (i in 1 until resultLists[disorder]!!.size){
-                        dataShow.add( java.lang.String.format( "%-10s%10s",rangeLists[disorder]!![i-1].min.toString()+"-"+rangeLists[disorder]!![i-1].max.toString(),resultLists[disorder]!![i]))
+//                    dataShow.add( java.lang.String.format("%-10s%10s",((rangeLists[disorder]!![0].min)).toString(), resultLists[disorder]!![0]))
+                    for (i in 0 until resultLists[disorder]!!.size){
+                        dataShow.add( java.lang.String.format( "%-10s%10s",rangeLists[disorder]!![i].min.toString()+"-"+rangeLists[disorder]!![i].max.toString(),resultLists[disorder]!![i]))
                     }
                     dataShow.add("_______________________________________")
 

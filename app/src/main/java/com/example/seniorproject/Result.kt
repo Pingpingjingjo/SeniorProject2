@@ -69,7 +69,7 @@ class Result : AppCompatActivity() {
 
     private fun saveData(){
 
-        val sdf = SimpleDateFormat("dd-M-yyyy_hh:mm:ss")
+        val sdf = SimpleDateFormat("dd-M-yyyy__hh:mm:ss")
 
         var addingReference = FirebaseDatabase.getInstance()
             .getReference("History/" + MyAppApplication.globalUser )

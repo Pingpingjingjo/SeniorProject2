@@ -30,8 +30,7 @@ class ResultAdapter(private val context: Context,
         val percent = dataSource[position].percenDouble
         Log.d("fuck",percent.toString())
         if (percent>=0 && percent <20){
-            //textView2.setBackgroundColor(Color.rgb (0,204,0))
-            textView2.setBackgroundColor(Color.parseColor("#2ca705"))
+            textView2.setBackgroundColor(Color.rgb (0,204,0))
             textView2.setTextColor(Color.WHITE)
         }
         else if (percent>=20 && percent <40){
