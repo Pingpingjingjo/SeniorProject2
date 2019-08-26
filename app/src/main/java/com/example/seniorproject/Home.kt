@@ -3,6 +3,7 @@ package com.example.seniorproject
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_history.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlin.Result
 
@@ -25,7 +26,7 @@ class Home : AppCompatActivity() {
 
         }
         historyBtn.setOnClickListener {
-            val intent3 = Intent(this, History::class.java);
+            val intent3 = Intent(this, history::class.java);
             startActivity(intent3)
 
         }

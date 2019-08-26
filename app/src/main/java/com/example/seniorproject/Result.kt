@@ -4,16 +4,27 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.view.View
 import android.widget.ListView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_result.*
+import kotlinx.android.synthetic.main.result_list_view.*
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 import kotlin.collections.HashMap
 
 class Result : AppCompatActivity() {
+
+
+    var isStarted = false
+    var progressStatus = 0
+    var handler: Handler? = null
+    var secondaryHandler: Handler? = Handler()
+    var primaryProgressStatus = 0
+    var secondaryProgressStatus = 0
 
 
     lateinit var dataReference: DatabaseReference
@@ -29,6 +40,19 @@ class Result : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
+
+        handler = Handler(Handler.Callback {
+            if (isStarted) {
+                progressStatus++
+            }
+            progressBarHorizontal.progress = progressStatus
+            textViewHorizontalProgress.text = "${progressStatus}/${progressBarHorizontal.max}"
+            handler?.sendEmptyMessageDelayed(0, 100)
+
+            true
+        })
+
+        handler?.sendEmptyMessage(0)
 
 
         infoBtn.setOnClickListener {
@@ -215,6 +239,12 @@ class Result : AppCompatActivity() {
                }
            })
        }
+    }
+
+
+
+    fun horizontalDeterminate(view: View) {
+        isStarted = !isStarted
     }
 
 
