@@ -2,16 +2,24 @@ package com.example.seniorproject
 
 import android.content.Context
 import android.graphics.Color
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ProgressBar
 import android.widget.TextView
+import kotlinx.android.synthetic.main.result_list_view.*
 
 class ResultAdapter(private val context: Context,
     private val dataSource: List<ResultData>
 ) : BaseAdapter(){
+
+    var isStarted = false
+    var progressStatus = 0
+    var handler: Handler? = null
+
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -22,6 +30,9 @@ class ResultAdapter(private val context: Context,
         val textView = rowView.findViewById<TextView>(R.id.result_text)
 
         val textView2 = rowView.findViewById<TextView>(R.id.result_percent)
+
+        val progressBarHorizontal = rowView.findViewById<ProgressBar>(R.id.progressBarHorizontal)
+        val textViewHorizontalProgress = rowView.findViewById<TextView>(R.id.textViewHorizontalProgress)
 
         textView2.text = dataSource[position].percent.toString()
         textView.text = dataSource[position].alias + "  : " + dataSource[position].valueAlias
@@ -52,6 +63,20 @@ class ResultAdapter(private val context: Context,
             textView2.setTextColor(Color.WHITE)
         }
 
+        handler = Handler(Handler.Callback {
+            if (isStarted) {
+                progressStatus++
+            }
+            progressBarHorizontal.progress = progressStatus
+//            textViewHorizontalProgress.text = "${progressStatus}/${progressBarHorizontal.max}"
+            handler?.sendEmptyMessageDelayed(0, 100)
+
+            true
+        })
+//        progressBarHorizontal.setOnClickListener(horizontalDeterminate(view = View))
+
+        handler?.sendEmptyMessage(0)
+
         return rowView
     }
 
@@ -66,6 +91,10 @@ class ResultAdapter(private val context: Context,
     override fun getCount(): Int {
        return dataSource.size
     }
+    fun horizontalDeterminate(view: View) {
+        isStarted = !isStarted
+    }
+
 
 
 }

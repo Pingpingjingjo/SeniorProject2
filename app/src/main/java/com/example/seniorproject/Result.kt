@@ -19,13 +19,10 @@ import kotlin.collections.HashMap
 class Result : AppCompatActivity() {
 
 
-    var isStarted = false
-    var progressStatus = 0
-    var handler: Handler? = null
-    var secondaryHandler: Handler? = Handler()
-    var primaryProgressStatus = 0
-    var secondaryProgressStatus = 0
 
+//    var secondaryHandler: Handler? = Handler()
+//    var primaryProgressStatus = 0
+//    var secondaryProgressStatus = 0
 
     lateinit var dataReference: DatabaseReference
     var disorderNameList: MutableList<String> = mutableListOf()
@@ -41,18 +38,7 @@ class Result : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
-        handler = Handler(Handler.Callback {
-            if (isStarted) {
-                progressStatus++
-            }
-            progressBarHorizontal.progress = progressStatus
-            textViewHorizontalProgress.text = "${progressStatus}/${progressBarHorizontal.max}"
-            handler?.sendEmptyMessageDelayed(0, 100)
 
-            true
-        })
-
-        handler?.sendEmptyMessage(0)
 
 
         infoBtn.setOnClickListener {
@@ -175,6 +161,8 @@ class Result : AppCompatActivity() {
                         saveData()
                     }
 
+
+
                 }
             })
         }
@@ -243,9 +231,6 @@ class Result : AppCompatActivity() {
 
 
 
-    fun horizontalDeterminate(view: View) {
-        isStarted = !isStarted
-    }
 
 
 }// finish program
