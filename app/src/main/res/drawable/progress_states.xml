@@ -31,8 +31,10 @@
                    android:tint="?attr/colorControlActivated">
                 <corners android:radius="8dp"/>
                 <size android:height="20dp" />
-                <solid android:color="#b9f6ca" />
-            </shape>
+                <gradient
+                        android:endColor="@android:color/holo_red_dark"
+                        android:startColor="@android:color/holo_orange_light"
+                />            </shape>
         </scale>
     </item>
 
