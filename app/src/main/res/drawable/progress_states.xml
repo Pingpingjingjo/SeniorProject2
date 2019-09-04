@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@android:id/background">
-        <shape android:shape="oval">
-            <stroke
-                    android:width="4dp"
-                    android:color="@color/colorPrimary" />
-            <solid android:color="@android:color/white" />
+    <item android:id="@android:id/background"
+          android:gravity="center_vertical|fill_horizontal">
+        <shape android:shape="rectangle"
+               android:tint="?attr/colorControlNormal">
+            <corners android:radius="8dp"/>
+            <size android:height="20dp" />
+            <solid android:color="#90caf9" />
         </shape>
     </item>
 
-
-    <item android:id="@android:id/secondaryProgress">
-        <clip
-                android:clipOrientation="vertical"
-                android:gravity="bottom">
-            <shape android:shape="oval">
-                <stroke
-                        android:width="4dp"
-                        android:color="@android:color/black" />
-                <solid android:color="@android:color/white" />
+    <item android:id="@android:id/secondaryProgress"
+          android:gravity="center_vertical|fill_horizontal">
+        <scale android:scaleWidth="100%">
+            <shape android:shape="rectangle"
+                   android:tint="?attr/colorControlHighlight">
+                <corners android:radius="8dp"/>
+                <size android:height="20dp" />
+                <solid android:color="#90caf9" />
             </shape>
-        </clip>
+        </scale>
     </item>
 
-    <item android:id="@android:id/progress">
-        <clip
-                android:clipOrientation="vertical"
-                android:gravity="bottom">
-            <shape android:shape="oval">
-                <stroke
-                        android:width="4dp"
-                        android:color="@color/colorAccent" />
-                <solid android:color="#F288F8" />
+
+    <item android:id="@android:id/progress"
+          android:gravity="center_vertical|fill_horizontal">
+        <scale android:scaleWidth="100%">
+            <shape android:shape="rectangle"
+                   android:tint="?attr/colorControlActivated">
+                <corners android:radius="8dp"/>
+                <size android:height="20dp" />
+                <solid android:color="#b9f6ca" />
             </shape>
-        </clip>
+        </scale>
     </item>
 
 </layer-list>
+

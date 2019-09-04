@@ -32,42 +32,44 @@ class ResultAdapter(private val context: Context,
         val textView2 = rowView.findViewById<TextView>(R.id.result_percent)
 
         val progressBarHorizontal = rowView.findViewById<ProgressBar>(R.id.progressBarHorizontal)
-        val textViewHorizontalProgress = rowView.findViewById<TextView>(R.id.textViewHorizontalProgress)
+//        val textViewHorizontalProgress = rowView.findViewById<TextView>(R.id.textViewHorizontalProgress)
 
         textView2.text = dataSource[position].percent.toString()
         textView.text = dataSource[position].alias + "  : " + dataSource[position].valueAlias
         textView.setTextColor(Color.BLACK);
         //
-        val percent = dataSource[position].percenDouble
-        Log.d("fuck",percent.toString())
-        if (percent>=0 && percent <20){
-            textView2.setBackgroundColor(Color.rgb (0,204,0))
-            textView2.setTextColor(Color.WHITE)
-        }
-        else if (percent>=20 && percent <40){
-            textView2.setBackgroundColor(Color.rgb (204,204,0))
-            textView2.setTextColor(Color.WHITE)
-
-        }
-        else if (percent>=40 && percent <60){
-            textView2.setBackgroundColor(Color.rgb(204,102,0))
-            textView2.setTextColor(Color.WHITE)
-
-        }
-        else if (percent >=60 && percent<80){
-            textView2.setBackgroundColor(Color.rgb(204,0,102))
-            textView2.setTextColor(Color.WHITE)
-        }
-        else {
-            textView2.setBackgroundColor(Color.rgb(204,0,0))
-            textView2.setTextColor(Color.WHITE)
-        }
+//        val percent = dataSource[position].percenDouble
+//        Log.d("fuck",percent.toString())
+//        if (percent>=0 && percent <20){
+//            textView2.setBackgroundColor(Color.rgb (0,204,0))
+//            textView2.setTextColor(Color.WHITE)
+//        }
+//        else if (percent>=20 && percent <40){
+//            textView2.setBackgroundColor(Color.rgb (204,204,0))
+//            textView2.setTextColor(Color.WHITE)
+//
+//        }
+//        else if (percent>=40 && percent <60){
+//            textView2.setBackgroundColor(Color.rgb(204,102,0))
+//            textView2.setTextColor(Color.WHITE)
+//
+//        }
+//        else if (percent >=60 && percent<80){
+//            textView2.setBackgroundColor(Color.rgb(204,0,102))
+//            textView2.setTextColor(Color.WHITE)
+//        }
+//        else {
+//            textView2.setBackgroundColor(Color.rgb(204,0,0))
+//            textView2.setTextColor(Color.WHITE)
+//        }
 
         handler = Handler(Handler.Callback {
-            if (isStarted) {
-                progressStatus++
-            }
-            progressBarHorizontal.progress = progressStatus
+            //if (isStarted) {
+             //   progressStatus++
+           // }
+            progressBarHorizontal.progress =  (dataSource[position].percenDouble/100 * progressBarHorizontal.max).toInt()
+            Log.d("percendouble", dataSource[position].percenDouble.toString())
+            Log.d("max",progressBarHorizontal.max.toString())
 //            textViewHorizontalProgress.text = "${progressStatus}/${progressBarHorizontal.max}"
             handler?.sendEmptyMessageDelayed(0, 100)
 
